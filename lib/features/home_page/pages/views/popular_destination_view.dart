@@ -24,26 +24,22 @@ class PopularDestinationView extends StatelessWidget {
           ),
         ),
         SizedBox(height: 15.w),
-        SizedBox(
-          height: 185.w,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemCount: listPopular.length,
-            separatorBuilder: (_, __) {
-              return SizedBox(width: 15.w);
-            },
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: (index == 0)
-                    ? EdgeInsets.only(left: 26.w)
-                    : EdgeInsets.zero,
-                child: PopularDestinationCard(
-                  name: listPopular[index]['name'],
-                  location: listPopular[index]['location'],
-                  imgUrl: listPopular[index]['imgUrl'],
-                ),
-              );
-            },
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          clipBehavior: Clip.none,
+          child: Row(
+            children: [
+              SizedBox(width: 26.w),
+              ...listPopular
+                  .map(
+                    (item) => PopularDestinationCard(
+                      name: item['name'],
+                      location: item['location'],
+                      imgUrl: item['imgUrl'],
+                    ),
+                  )
+                  .toList(),
+            ],
           ),
         ),
       ],

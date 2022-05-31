@@ -27,6 +27,7 @@ class RecommendedPlaceView extends StatelessWidget {
         ListView.separated(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
+          clipBehavior: Clip.none,
           itemCount: listRecommended.length,
           separatorBuilder: (_, __) {
             return SizedBox(height: 15.w);
