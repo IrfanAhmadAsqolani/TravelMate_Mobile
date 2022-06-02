@@ -20,6 +20,7 @@ class PopularDestinationCard extends StatelessWidget {
     return Container(
       width: 200.w,
       height: 152.w,
+      margin: EdgeInsets.only(right: 15.w),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15.r),
