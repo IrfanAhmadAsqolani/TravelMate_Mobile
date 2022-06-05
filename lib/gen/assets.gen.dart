@@ -38,6 +38,9 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/ic_search.svg
   String get icSearch => 'assets/icons/ic_search.svg';
+
+  /// File path: assets/icons/ic_wa.png
+  AssetGenImage get icWa => const AssetGenImage('assets/icons/ic_wa.png');
 }
 
 class Assets {
