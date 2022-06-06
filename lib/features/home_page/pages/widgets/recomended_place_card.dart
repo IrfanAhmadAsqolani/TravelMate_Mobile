@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travelmate/dependencies/dependencies.dart';
 
+import '../../../../components/components.dart';
 import '../../../../utils/utils.dart';
 
 class RecommendedPlaceCard extends StatelessWidget {
@@ -63,33 +64,13 @@ class RecommendedPlaceCard extends StatelessWidget {
                 Row(
                   children: [
                     category == 0
-                        ? Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 7.w,
-                              vertical: 5.w,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Color(0xFF7FDFFE),
-                              borderRadius: BorderRadius.circular(10.r),
-                            ),
-                            child: const Text(
-                              'Pantai',
-                              style: TextStyle(fontSize: 12),
-                            ),
+                        ? const CategoryChip(
+                            title: 'Pantai',
+                            color: Color(0xFF7FDFFE),
                           )
-                        : Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 7.w,
-                              vertical: 5.w,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Color(0xFFE4A342),
-                              borderRadius: BorderRadius.circular(10.r),
-                            ),
-                            child: const Text(
-                              'Gunung',
-                              style: TextStyle(fontSize: 12),
-                            ),
+                        : const CategoryChip(
+                            title: 'Gunung',
+                            color: Color(0xFFE4A342),
                           ),
                     SizedBox(width: 6.w),
                     Text(
