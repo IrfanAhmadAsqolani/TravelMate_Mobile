@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travelmate/dependencies/dependencies.dart';
+import 'package:travelmate/features/destination_detail/pages/destination_detail_page.dart';
 
 import '../../../../utils/utils.dart';
 
@@ -17,55 +18,60 @@ class PopularDestinationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 200.w,
-      height: 152.w,
-      margin: EdgeInsets.only(right: 15.w),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(15.r),
-        boxShadow: Shadows.defaultShadow(),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: 200.w,
-            height: 105.w,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(15.r),
-                topRight: Radius.circular(15.r),
-              ),
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(
-                  imgUrl,
+    return InkWell(
+      onTap: () {
+        Get.toNamed(destinationDetailPageRoute);
+      },
+      child: Container(
+        width: 200.w,
+        height: 152.w,
+        margin: EdgeInsets.only(right: 15.w),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15.r),
+          boxShadow: Shadows.defaultShadow(),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: 200.w,
+              height: 105.w,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15.r),
+                  topRight: Radius.circular(15.r),
+                ),
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(
+                    imgUrl,
+                  ),
                 ),
               ),
             ),
-          ),
-          SizedBox(height: 7.w),
-          Padding(
-            padding: EdgeInsets.only(left: 15.w),
-            child: Text(
-              name,
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
+            SizedBox(height: 7.w),
+            Padding(
+              padding: EdgeInsets.only(left: 15.w),
+              child: Text(
+                name,
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 15.w),
-            child: Text(
-              location,
-              style: TextStyle(
-                fontSize: 12,
+            Padding(
+              padding: EdgeInsets.only(left: 15.w),
+              child: Text(
+                location,
+                style: TextStyle(
+                  fontSize: 12,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
