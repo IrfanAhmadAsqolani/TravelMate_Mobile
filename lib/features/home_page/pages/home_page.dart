@@ -3,7 +3,7 @@ import 'package:travelmate/dependencies/dependencies.dart';
 
 import 'views/views.dart';
 
-const String homePageRoute = '/'; // TODO(adityandar): change to homePageRoute
+const String homePageRoute = '/home-page'; //
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
