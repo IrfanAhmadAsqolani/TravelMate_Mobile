@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travelmate/features/login/pages/login_page.dart';
 import 'package:travelmate/utils/utils.dart';
 
 import 'dependencies/dependencies.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
             fontFamily: 'SFPro',
           ),
           getPages: Routes.pages(),
+          initialRoute: loginPageRoute,
         );
       },
     );
