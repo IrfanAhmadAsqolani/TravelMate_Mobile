@@ -70,11 +70,11 @@ class InvitationCard extends StatelessWidget {
             ],
           ),
           // TODO(adityandar): implement icon
-          // IconButton(
-          //   onPressed: onTap,
-          //   icon: Icons.chevron_right_rounded,
-          //   s
-          // )
+          IconButton(
+            onPressed: onTap,
+            icon: Icon(Icons.chevron_right_rounded),
+            
+          )
         ],
       ),
     );
