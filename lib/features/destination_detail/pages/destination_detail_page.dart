@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travelmate/dependencies/dependencies.dart';
 import 'package:travelmate/dummy/recommended_places_dummy.dart';
+import 'package:travelmate/features/invitation_detail/pages/invitation_detail_page.dart';
 import 'package:travelmate/utils/utils.dart';
 
 import '../../../components/components.dart';
@@ -79,7 +80,9 @@ class DestinationDetailPage extends StatelessWidget {
                   date: DateTime.now(),
                   creator: 'Agus Nur Hasyim',
                   number: 10,
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed(invitationDetailPageRoute);
+                  },
                 );
               },
               separatorBuilder: (context, index) => SizedBox(

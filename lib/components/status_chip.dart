@@ -9,7 +9,7 @@ class StatusChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color color = isOpen ? CustomColors.danger : CustomColors.success;
+    final Color color = isOpen ?  CustomColors.success : CustomColors.danger;
     final String text = isOpen ? 'Open' : 'Closed';
     return Container(
       padding: EdgeInsets.symmetric(
