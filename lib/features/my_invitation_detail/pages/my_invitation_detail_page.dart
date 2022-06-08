@@ -63,7 +63,7 @@ class MyInvitationDetailPage extends StatelessWidget {
                   style: TextStyles.heading5Regular(),
                 ),
                 SizedBox(height: 8.w),
-                CustomButton.info(
+                CustomOutlinedButton.info(
                   text: 'edit',
                   onTap: () {},
                   margin: EdgeInsets.zero,
