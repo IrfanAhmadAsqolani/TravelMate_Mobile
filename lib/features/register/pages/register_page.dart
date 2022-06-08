@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travelmate/components/components.dart';
 import 'package:travelmate/dependencies/dependencies.dart';
-import 'package:travelmate/features/home_page/pages/home_page.dart';
+import 'package:travelmate/features/onboarding/pages/onboarding_page.dart';
 import 'package:travelmate/utils/utils.dart';
 
 const String registerPageRoute = '/register-page';
@@ -47,7 +47,7 @@ class RegisterPage extends StatelessWidget {
               margin: EdgeInsets.zero,
               onTap: () {
                 // TODO(adityandar): change to logic of register
-                Get.offNamedUntil(homePageRoute, (route) => false);
+                Get.offNamedUntil(onboardingPageRoute, (route) => false);
               },
             ),
             SizedBox(height: 32.w),
