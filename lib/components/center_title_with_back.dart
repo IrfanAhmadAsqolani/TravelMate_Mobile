@@ -3,6 +3,8 @@ import 'package:travelmate/utils/utils.dart';
 
 import '../dependencies/dependencies.dart';
 import '../gen/assets.gen.dart';
+import 'components.dart';
+
 
 class CenterTitleWithBack extends StatelessWidget {
   const CenterTitleWithBack({
@@ -22,18 +24,7 @@ class CenterTitleWithBack extends StatelessWidget {
             style: TextStyles.heading4(),
           ),
         ),
-        Padding(
-          padding: EdgeInsets.only(left: 27.w),
-          child: InkWell(
-            onTap: () {
-              Get.back();
-            },
-            child: SvgPicture.asset(
-              Assets.icons.icChevronLeft,
-              width: 24.w,
-            ),
-          ),
-        ),
+        CustomBackButton(),
       ],
     );
   }
