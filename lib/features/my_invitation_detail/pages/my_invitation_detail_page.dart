@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:travelmate/components/components.dart';
 import 'package:travelmate/dependencies/dependencies.dart';
-import 'package:travelmate/utils/visual/visual.dart';
 
-const String invitationDetailPageRoute = '/invitation-detail';
+import '../../../components/components.dart';
+import '../../../utils/utils.dart';
 
-class InvitationDetailPage extends StatelessWidget {
-  const InvitationDetailPage({Key? key}) : super(key: key);
+const String myInvitationDetailPageRoute = '/my-invitation-detail';
+
+class MyInvitationDetailPage extends StatelessWidget {
+  const MyInvitationDetailPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 26.w),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 26.w),
           const CustomBackButton(),
           Padding(
             padding: EdgeInsets.only(left: 28.w, right: 28.w),
@@ -63,42 +64,23 @@ class InvitationDetailPage extends StatelessWidget {
                 ),
                 SizedBox(height: 8.w),
                 CustomButton.info(
-                  text: 'Requested to Join',
+                  text: 'edit',
+                  onTap: () {},
+                  margin: EdgeInsets.zero,
+                ),
+                SizedBox(height: 8.w),
+                CustomButton.info(
+                  text: 'Close Invitation',
                   onTap: () {},
                   margin: EdgeInsets.zero,
                 ),
                 SizedBox(height: 44.w),
-                Text(
-                  'You might interest in',
-                  style: TextStyles.heading5Regular(),
-                ),
               ],
             ),
           ),
-          SizedBox(height: 19.w),
-          ListView.separated(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.zero,
-            itemBuilder: (context, index) {
-              return InvitationCard(
-                title: 'Touring Santai',
-                date: DateTime.now(),
-                creator: 'Agus Nur Hasyim',
-                number: 10,
-                onTap: () {
-                  Get.toNamed(invitationDetailPageRoute);
-                },
-              );
-            },
-            separatorBuilder: (context, index) => SizedBox(
-              height: 17.w,
-            ),
-            itemCount: 10,
-          ),
-          SizedBox(height: 30.w),
-        ],
+          ],
+        ),
       ),
-    ));
+    );
   }
 }
