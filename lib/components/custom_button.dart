@@ -67,7 +67,6 @@ class CustomButton extends StatelessWidget {
 
   factory CustomButton.inactive({
     required String text,
-    required VoidCallback onTap,
     Widget? child,
     EdgeInsets? margin,
     bool isLoading = false,
@@ -76,9 +75,9 @@ class CustomButton extends StatelessWidget {
       text: text,
       color: CustomColors.grey,
       margin: margin,
-      onTap: onTap,
       isLoading: isLoading,
       child: child,
+      onTap: () {},
     );
   }
 

@@ -2,6 +2,11 @@
 /// *****************************************************
 ///  FlutterGen
 /// *****************************************************
+
+// coverage:ignore-file
+// ignore_for_file: type=lint
+// ignore_for_file: directives_ordering,unnecessary_import
+
 import 'package:flutter/widgets.dart';
 
 class $AssetsIconsGen {
@@ -38,10 +43,27 @@ class $AssetsIconsGen {
   AssetGenImage get icWa => const AssetGenImage('assets/icons/ic_wa.png');
 }
 
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
+
+  /// File path: assets/images/img_ktp_example.png
+  AssetGenImage get imgKtpExample =>
+      const AssetGenImage('assets/images/img_ktp_example.png');
+
+  /// File path: assets/images/img_ktp_not_found.png
+  AssetGenImage get imgKtpNotFound =>
+      const AssetGenImage('assets/images/img_ktp_not_found.png');
+
+  /// File path: assets/images/img_success.png
+  AssetGenImage get imgSuccess =>
+      const AssetGenImage('assets/images/img_success.png');
+}
+
 class Assets {
   Assets._();
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
+  static const $AssetsImagesGen images = $AssetsImagesGen();
 }
 
 class AssetGenImage {
