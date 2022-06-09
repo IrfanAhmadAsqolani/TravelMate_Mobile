@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:travelmate/features/home_page/pages/home_page.dart';
+import 'package:travelmate/features/main_page/main_page.dart';
 import 'package:travelmate/features/onboarding/pages/onboarding_page.dart';
 
 import '../../dependencies/dependencies.dart';
@@ -27,6 +28,10 @@ class Routes {
         page: () => OnboardingPage(),
       ),
       GetPage(
+        name: mainPageRoute,
+        page: () => MainPage(),
+      ),
+      GetPage(
         name: invitationDetailPageRoute,
         page: () => InvitationDetailPage(),
       ),
@@ -36,11 +41,11 @@ class Routes {
       ),
       GetPage(
         name: myInvitationPageRoute,
-        page: () =>MyInvitationPage(),
+        page: () => MyInvitationPage(),
       ),
       GetPage(
         name: myInvitationDetailPageRoute,
-        page: () =>MyInvitationDetailPage(),
+        page: () => MyInvitationDetailPage(),
       ),
     ];
   }

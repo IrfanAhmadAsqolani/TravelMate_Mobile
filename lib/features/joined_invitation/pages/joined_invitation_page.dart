@@ -12,22 +12,23 @@ class JoinedInvitationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 31.w),
-          Padding(
-            padding: EdgeInsets.only(left: 26.w),
-            child: const Text(
-              'Joined Invitation',
-              style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 28,
+        body: SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 31.w),
+            Padding(
+              padding: EdgeInsets.only(left: 26.w),
+              child: const Text(
+                'Joined Invitation',
+                style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 28,
+                ),
               ),
             ),
-          ),
-          SizedBox(height: 19.w),
+            SizedBox(height: 19.w),
             ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -49,7 +50,8 @@ class JoinedInvitationPage extends StatelessWidget {
               itemCount: 10,
             ),
             SizedBox(height: 30.w),
-        ],
+          ],
+        ),
       ),
     ));
   }

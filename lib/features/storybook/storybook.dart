@@ -20,7 +20,6 @@ class StoryBook extends StatelessWidget {
             SizedBox(height: 5.w),
             CustomButton.inactive(
               text: 'Requested',
-              onTap: () {},
             ),
             SizedBox(height: 5.w),
             CustomButton.danger(

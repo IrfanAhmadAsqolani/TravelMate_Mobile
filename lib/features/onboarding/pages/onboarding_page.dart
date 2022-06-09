@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:travelmate/features/home_page/pages/home_page.dart';
+import 'package:travelmate/features/main_page/main_page.dart';
 
 import '../../../dependencies/dependencies.dart';
 import 'views/views.dart';
@@ -30,7 +30,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
             onContinueCallback: () => controller.jumpToPage(2),
           ),
           OnboardingCompletedView(
-            onContinueCallback: () => Get.offAllNamed(homePageRoute),
+            onContinueCallback: () => Get.offAllNamed(mainPageRoute),
           ),
         ],
       ),

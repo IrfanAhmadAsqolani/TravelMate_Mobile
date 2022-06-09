@@ -14,36 +14,38 @@ class MyInvitationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 35.w),
-            const CenterTitleWithBack(
-              title: 'My Invitation',
-            ),
-            SizedBox(height: 35.w),
-            ListView.separated(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              padding: EdgeInsets.zero,
-              itemBuilder: (context, index) {
-                return InvitationCard(
-                  title: 'Touring Santai',
-                  date: DateTime.now(),
-                  creator: 'Agus Nur Hasyim',
-                  number: 10,
-                  onTap: () {
-                    Get.toNamed(myInvitationDetailPageRoute);
-                  },
-                );
-              },
-              separatorBuilder: (context, index) => SizedBox(
-                height: 17.w,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 35.w),
+              const CenterTitleWithBack(
+                title: 'My Invitation',
               ),
-              itemCount: 4,
-            ),
-          ],
+              SizedBox(height: 35.w),
+              ListView.separated(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                padding: EdgeInsets.zero,
+                itemBuilder: (context, index) {
+                  return InvitationCard(
+                    title: 'Touring Santai',
+                    date: DateTime.now(),
+                    creator: 'Agus Nur Hasyim',
+                    number: 10,
+                    onTap: () {
+                      Get.toNamed(myInvitationDetailPageRoute);
+                    },
+                  );
+                },
+                separatorBuilder: (context, index) => SizedBox(
+                  height: 17.w,
+                ),
+                itemCount: 4,
+              ),
+            ],
+          ),
         ),
       ),
     );
