@@ -23,7 +23,7 @@ class CustomButton extends StatelessWidget {
   }) {
     return CustomButton(
       text: text,
-      color: CustomColors.info,
+      color: CustomColors.primary,
       margin: margin,
       onTap: onTap,
       isLoading: isLoading,

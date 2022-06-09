@@ -35,45 +35,47 @@ class InvitationCard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: TextStyles.heading5SemiBold(),
-              ),
-              SizedBox(height: 5.w),
-              Text(
-                date.toString(), // TODO(adityandar): change to correct style
-                style: TextStyles.heading7Regular(),
-              ),
-              SizedBox(height: 5.w),
-              Text(
-                'Created by $creator',
-                style: TextStyles.heading7Regular(
-                  color: CustomColors.grey,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: TextStyles.heading5SemiBold(),
                 ),
-              ),
-              SizedBox(height: 5.w),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  StatusChip(isOpen: isOpen),
-                  SizedBox(width: 9.w),
-                  Text(
-                    '$number Persons',
-                    style: TextStyles.heading7Regular(),
+                SizedBox(height: 5.w),
+                Text(
+                  date.toString(), // TODO(adityandar): change to correct style
+                  style: TextStyles.heading7Regular(),
+                ),
+                SizedBox(height: 5.w),
+                Text(
+                  'Created by $creator',
+                  style: TextStyles.heading7Regular(
+                    color: CustomColors.grey,
                   ),
-                ],
-              ),
-            ],
+                ),
+                SizedBox(height: 5.w),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    StatusChip(isOpen: isOpen),
+                    SizedBox(width: 9.w),
+                    Text(
+                      '$number Persons',
+                      style: TextStyles.heading7Regular(),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
+          SizedBox(width: 8.w),
           // TODO(adityandar): implement icon
           IconButton(
             onPressed: onTap,
             icon: Icon(Icons.chevron_right_rounded),
-            
           )
         ],
       ),
