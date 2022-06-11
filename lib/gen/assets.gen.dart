@@ -54,6 +54,10 @@ class $AssetsImagesGen {
   AssetGenImage get imgKtpNotFound =>
       const AssetGenImage('assets/images/img_ktp_not_found.png');
 
+  /// File path: assets/images/img_person_default.png
+  AssetGenImage get imgPersonDefault =>
+      const AssetGenImage('assets/images/img_person_default.png');
+
   /// File path: assets/images/img_success.png
   AssetGenImage get imgSuccess =>
       const AssetGenImage('assets/images/img_success.png');
