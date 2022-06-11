@@ -61,7 +61,13 @@ class InvitationDetailPage extends StatelessWidget {
                   'Jadi inget nasehat alm nenek waktu abang gw lagi nikahan, dia nasihatin pas gw lagi duduk di samping sound sistem dan sampe sekarang gw gatau apa nasihatnya karna ga kedengeran Intinya ayo kita touring, prefer dom bandung. untuk budget palingan 500rb udah cukup',
                   style: TextStyles.heading5Regular(),
                 ),
-                SizedBox(height: 8.w),
+                SizedBox(height: 10.w),
+                SmallProfileCard(
+                  name: 'Cameron Steward',
+                  time: DateTime.now(),
+                  imgUrl: 'https://via.placeholder.com/150',
+                ),
+                SizedBox(height: 10.w),
                 CustomButton.info(
                   text: 'Requested to Join',
                   onTap: () {},
