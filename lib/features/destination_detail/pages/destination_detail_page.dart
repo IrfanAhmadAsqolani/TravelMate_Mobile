@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travelmate/dependencies/dependencies.dart';
 import 'package:travelmate/dummy/recommended_places_dummy.dart';
+import 'package:travelmate/features/invitation_create/pages/invitation_create_page.dart';
 import 'package:travelmate/features/invitation_detail/pages/invitation_detail_page.dart';
 import 'package:travelmate/utils/utils.dart';
 
@@ -103,7 +104,10 @@ class DestinationDetailPage extends StatelessWidget {
               children: [
                 CustomButton.info(
                   text: "Create Invitation",
-                  onTap: () {},
+                  onTap: () {
+                    Get.offNamedUntil(
+                        invitationCreatePageRoute, (route) => false);
+                  },
                 ),
                 SizedBox(height: 20.w),
               ],

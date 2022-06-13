@@ -6,6 +6,7 @@ import 'package:travelmate/features/onboarding/pages/onboarding_page.dart';
 
 import '../../dependencies/dependencies.dart';
 import '../../features/destination_detail/pages/destination_detail_page.dart';
+import '../../features/invitation_create/pages/invitation_create_page.dart';
 import '../../features/invitation_detail/pages/invitation_detail_page.dart';
 import '../../features/joined_invitation/pages/joined_invitation_page.dart';
 import '../../features/login/pages/login_page.dart';
@@ -46,6 +47,10 @@ class Routes {
       GetPage(
         name: myInvitationDetailPageRoute,
         page: () => MyInvitationDetailPage(),
+      ),
+      GetPage(
+        name: invitationCreatePageRoute,
+        page: () => InvitationCreatePage(),
       ),
     ];
   }

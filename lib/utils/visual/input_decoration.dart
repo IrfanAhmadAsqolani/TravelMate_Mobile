@@ -23,4 +23,31 @@ class CustomInputDecoration {
       ),
     );
   }
+
+  static InputDecoration formDecoration(String hint) {
+    return InputDecoration(
+      filled: true,
+      fillColor: CustomColors.white,
+      hintText: hint,
+      hintStyle: TextStyles.heading5Regular(
+        color: CustomColors.darkGrey.withOpacity(0.3),
+      ),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide.none,
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide.none,
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide.none,
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide.none,
+      ),
+    );
+  }
 }
