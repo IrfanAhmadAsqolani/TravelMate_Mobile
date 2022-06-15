@@ -12,6 +12,9 @@ import 'package:flutter/widgets.dart';
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/ic_approve.svg
+  String get icApprove => 'assets/icons/ic_approve.svg';
+
   /// File path: assets/icons/ic_chevron_left.svg
   String get icChevronLeft => 'assets/icons/ic_chevron_left.svg';
 
@@ -35,6 +38,9 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/ic_profile.svg
   String get icProfile => 'assets/icons/ic_profile.svg';
+
+  /// File path: assets/icons/ic_reject.svg
+  String get icReject => 'assets/icons/ic_reject.svg';
 
   /// File path: assets/icons/ic_search.svg
   String get icSearch => 'assets/icons/ic_search.svg';
@@ -82,7 +88,7 @@ class AssetGenImage {
     ImageErrorWidgetBuilder? errorBuilder,
     String? semanticLabel,
     bool excludeFromSemantics = false,
-    double? scale = 1.0,
+    double? scale,
     double? width,
     double? height,
     Color? color,
@@ -129,4 +135,6 @@ class AssetGenImage {
   }
 
   String get path => _assetName;
+
+  String get keyName => _assetName;
 }
