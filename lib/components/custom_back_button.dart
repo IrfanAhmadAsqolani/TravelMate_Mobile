@@ -15,7 +15,6 @@ class CustomBackButton extends StatelessWidget {
       child: InkWell(
         onTap: () {
           Get.back();
-          print("aaa");
         },
         child: SvgPicture.asset(
           Assets.icons.icChevronLeft,
