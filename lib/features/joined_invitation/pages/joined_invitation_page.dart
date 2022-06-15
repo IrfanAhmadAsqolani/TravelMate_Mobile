@@ -38,6 +38,7 @@ class JoinedInvitationPage extends StatelessWidget {
                   title: 'Touring Santai',
                   date: DateTime.now(),
                   creator: 'Agus Nur Hasyim',
+                  isOpen: true,
                   number: 10,
                   onTap: () {
                     Get.toNamed(invitationDetailPageRoute);

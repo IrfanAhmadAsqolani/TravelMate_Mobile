@@ -7,8 +7,14 @@ import 'package:travelmate/utils/visual/visual.dart';
 
 const String invitationDetailPageRoute = '/invitation-detail';
 
-class InvitationDetailPage extends StatelessWidget {
+class InvitationDetailPage extends StatefulWidget {
   const InvitationDetailPage({Key? key}) : super(key: key);
+
+  @override
+  State<InvitationDetailPage> createState() => _InvitationDetailPageState();
+}
+
+class _InvitationDetailPageState extends State<InvitationDetailPage> {
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +23,7 @@ class InvitationDetailPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 26.w),
+          SizedBox(height: 52.w),
           const CustomBackButton(),
           Padding(
             padding: EdgeInsets.only(left: 28.w, right: 28.w),
@@ -68,15 +74,28 @@ class InvitationDetailPage extends StatelessWidget {
                   imgUrl: 'https://via.placeholder.com/150',
                 ),
                 SizedBox(height: 10.w),
+                Container(
+                  decoration: BoxDecoration(
+                    boxShadow: Shadows.defaultShadow(),
+                  ),
+                  child: TextFormField(
+                    decoration: CustomInputDecoration.formDecoration(
+                      'Add Message'),
+                    maxLines: null,
+                    minLines: 2,
+                    maxLength: 100,
+                  ),
+                ),
+                SizedBox(height: 10.w),
                 CustomButton.info(
-                  text: 'Requested to Join',
+                  text: 'Request to Join',
                   onTap: () {},
                   margin: EdgeInsets.zero,
                 ),
                 SizedBox(height: 44.w),
                 Text(
                   'You might interest in',
-                  style: TextStyles.heading5Regular(),
+                  style: TextStyles.heading5SemiBold(),
                 ),
               ],
             ),

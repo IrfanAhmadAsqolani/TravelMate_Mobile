@@ -83,6 +83,7 @@ class DestinationDetailPage extends StatelessWidget {
                       date: DateTime.now(),
                       creator: 'Agus Nur Hasyim',
                       number: 10,
+                      isOpen: true,
                       onTap: () {
                         Get.toNamed(invitationDetailPageRoute);
                       },
