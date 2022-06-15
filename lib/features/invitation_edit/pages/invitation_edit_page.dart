@@ -7,10 +7,10 @@ import 'package:travelmate/utils/visual/visual.dart';
 
 import '../../../components/components.dart';
 
-const String invitationCreatePageRoute = '/invitation-create';
+const String invitationEditPageRoute = '/invitation-edit';
 
-class InvitationCreatePage extends StatelessWidget {
-  const InvitationCreatePage({Key? key}) : super(key: key);
+class InvitationEditPage extends StatelessWidget {
+  const InvitationEditPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class InvitationCreatePage extends StatelessWidget {
           children: [
             SizedBox(height: 52.w),
             const CenterTitleWithBack(
-              title: 'Create Invitation',
+              title: 'Edit Invitation',
             ),
             Padding(
               padding: EdgeInsets.only(left: 28.w, right: 28.w),
@@ -109,7 +109,7 @@ class InvitationCreatePage extends StatelessWidget {
                   ),
                   SizedBox(height: 30.w),
                   CustomButton.info(
-                    text: 'Create',
+                    text: 'Save',
                     onTap: () {},
                     margin: EdgeInsets.zero,
                   ),
