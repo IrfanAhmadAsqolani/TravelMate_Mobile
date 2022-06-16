@@ -95,6 +95,7 @@ class InvitationEditPage extends StatelessWidget {
                           'Description (Optional)'),
                       maxLines: null,
                       minLines: 2,
+                      maxLength: 500,
                     ),
                   ),
                   SizedBox(height: 10.w),

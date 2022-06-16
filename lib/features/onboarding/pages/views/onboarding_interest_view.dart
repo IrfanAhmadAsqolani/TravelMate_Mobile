@@ -25,7 +25,8 @@ class OnboardingInterestView extends StatelessWidget {
             children: [
               SizedBox(height: 100.w),
               Text(
-                'What are your interests?',
+                textAlign: TextAlign.center,
+                'What are your\ninterests?',
                 style: TextStyles.heading1(),
               ),
             ],
