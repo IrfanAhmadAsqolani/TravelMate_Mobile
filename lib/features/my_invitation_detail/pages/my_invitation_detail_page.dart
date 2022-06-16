@@ -6,6 +6,7 @@ import 'package:travelmate/dependencies/dependencies.dart';
 import '../../../components/components.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../utils/utils.dart';
+import '../../invitation_edit/pages/invitation_edit_page.dart';
 
 const String myInvitationDetailPageRoute = '/my-invitation-detail';
 
@@ -64,9 +65,19 @@ class MyInvitationDetailPage extends StatelessWidget {
                     style: TextStyles.heading5Regular(),
                   ),
                   SizedBox(height: 10.w),
+                  SmallProfileCard(
+                    name: 'You',
+                    time: DateTime.now(),
+                    imgUrl: 'https://via.placeholder.com/150',
+                  ),
+                  SizedBox(height: 10.w),
                   CustomOutlinedButton.info(
                     text: 'Edit',
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed(
+                        invitationEditPageRoute,
+                      );
+                    },
                     margin: EdgeInsets.zero,
                   ),
                   SizedBox(height: 10.w),
@@ -85,10 +96,14 @@ class MyInvitationDetailPage extends StatelessWidget {
                       reqMessage:
                           "Pengen ikutttttttttt, Jikalau telah datang waktu yang dinanti Ku pasti bahagiakan dirimu seorang Kuharap dikau sabar menunggu"),
                   SizedBox(height: 10.w),
-                  RequestCard(reqMessage: "Gamau ikut sih iseng doang"),
+                  RequestCard(
+                    reqMessage: "Gamau ikut sih iseng doang",
+                  ),
                   SizedBox(height: 10.w),
                   RequestCard(
-                      reqMessage: "Mau ikut dong belum pernah liat pantai :("),
+                    reqMessage: "Mau ikut dong belum pernah liat pantai :(",
+                  ),
+                  SizedBox(height: 30.w),
                 ],
               ),
             ),
