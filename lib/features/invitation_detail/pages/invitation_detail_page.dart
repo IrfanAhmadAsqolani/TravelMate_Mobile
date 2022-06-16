@@ -111,6 +111,7 @@ class _InvitationDetailPageState extends State<InvitationDetailPage> {
                 date: DateTime.now(),
                 creator: 'Agus Nur Hasyim',
                 number: 10,
+                isOpen: true,
                 onTap: () {
                   Get.toNamed(invitationDetailPageRoute);
                 },
