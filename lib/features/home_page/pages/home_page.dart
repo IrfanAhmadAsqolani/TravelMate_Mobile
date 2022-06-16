@@ -6,7 +6,7 @@ import 'views/views.dart';
 const String homePageRoute = '/home-page'; //
 
 class HomePage extends StatelessWidget {
-  HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

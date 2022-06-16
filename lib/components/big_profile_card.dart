@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:travelmate/dependencies/dependencies.dart';
 import 'package:travelmate/gen/assets.gen.dart';
 
+import '../helpers/helpers.dart';
 import '../utils/utils.dart';
 
 class BigProfileCard extends StatefulWidget {
@@ -53,7 +54,7 @@ class _BigProfileCardState extends State<BigProfileCard> {
                 style: TextStyles.heading4(),
               ),
               Text(
-                widget.time?.toString() ?? '',
+                DateHelper.getReadableDate(widget.time),
                 style: TextStyles.heading6(
                   color: CustomColors.darkGrey.withOpacity(0.6),
                 ),

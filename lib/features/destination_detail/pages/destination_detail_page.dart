@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:travelmate/dependencies/dependencies.dart';
 import 'package:travelmate/dummy/recommended_places_dummy.dart';
 import 'package:travelmate/features/invitation_create/pages/invitation_create_page.dart';
-import 'package:travelmate/features/invitation_detail/pages/invitation_detail_page.dart';
 import 'package:travelmate/utils/utils.dart';
 
 import '../../../components/components.dart';
+import '../controllers/controllers.dart';
 
 const String destinationDetailPageRoute = '/destination-detail';
 
@@ -14,6 +14,7 @@ class DestinationDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(DestinationController());
     return Scaffold(
       body: Stack(
         children: [
@@ -73,26 +74,32 @@ class DestinationDetailPage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 19.w),
-                ListView.separated(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  padding: EdgeInsets.zero,
-                  itemBuilder: (context, index) {
-                    return InvitationCard(
-                      title: 'Touring Santai',
-                      date: DateTime.now(),
-                      creator: 'Agus Nur Hasyim',
-                      number: 10,
-                      isOpen: true,
-                      onTap: () {
-                        Get.toNamed(invitationDetailPageRoute);
-                      },
+                GetX<DestinationController>(
+                  builder: (controller) {
+                    if (controller.isLoading.isTrue) {
+                      return const CircularProgressIndicator();
+                    }
+                    if (controller.invitations.isNotEmpty) {
+                      return ListView.separated(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        padding: EdgeInsets.zero,
+                        itemBuilder: (context, index) {
+                          return InvitationCard(
+                            invitation: controller.invitations[index],
+                          );
+                        },
+                        separatorBuilder: (context, index) => SizedBox(
+                          height: 17.w,
+                        ),
+                        itemCount: controller.invitations.length,
+                      );
+                    }
+                    return Text(
+                      'There is no available invitation',
+                      style: TextStyles.heading5Regular(),
                     );
                   },
-                  separatorBuilder: (context, index) => SizedBox(
-                    height: 17.w,
-                  ),
-                  itemCount: 10,
                 ),
                 SizedBox(height: 100.w),
               ],

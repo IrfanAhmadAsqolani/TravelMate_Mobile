@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travelmate/dependencies/dependencies.dart';
 
-import '../../../components/components.dart';
-import '../../invitation_detail/pages/invitation_detail_page.dart';
-
 const String joinedInvitationPageRoute = '/joined-invitation';
 
 class JoinedInvitationPage extends StatelessWidget {
@@ -29,27 +26,28 @@ class JoinedInvitationPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 19.w),
-            ListView.separated(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              padding: EdgeInsets.zero,
-              itemBuilder: (context, index) {
-                return InvitationCard(
-                  title: 'Touring Santai',
-                  date: DateTime.now(),
-                  creator: 'Agus Nur Hasyim',
-                  isOpen: true,
-                  number: 10,
-                  onTap: () {
-                    Get.toNamed(invitationDetailPageRoute);
-                  },
-                );
-              },
-              separatorBuilder: (context, index) => SizedBox(
-                height: 17.w,
-              ),
-              itemCount: 10,
-            ),
+            // TODO(adityandar): uncomment when available
+            // ListView.separated(
+            //   shrinkWrap: true,
+            //   physics: const NeverScrollableScrollPhysics(),
+            //   padding: EdgeInsets.zero,
+            //   itemBuilder: (context, index) {
+            //     return InvitationCard(
+            //       title: 'Touring Santai',
+            //       date: DateTime.now(),
+            //       creator: 'Agus Nur Hasyim',
+            //       isOpen: true,
+            //       number: 10,
+            //       onTap: () {
+            //         Get.toNamed(invitationDetailPageRoute);
+            //       },
+            //     );
+            //   },
+            //   separatorBuilder: (context, index) => SizedBox(
+            //     height: 17.w,
+            //   ),
+            //   itemCount: 10,
+            // ),
             SizedBox(height: 30.w),
           ],
         ),

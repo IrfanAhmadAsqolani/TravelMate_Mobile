@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travelmate/dependencies/dependencies.dart';
+import 'package:travelmate/helpers/helpers.dart';
 
 import '../gen/assets.gen.dart';
 import '../utils/utils.dart';
@@ -53,7 +54,7 @@ class _SmallProfileCardState extends State<SmallProfileCard> {
                 style: TextStyles.heading5Regular(),
               ),
               Text(
-                widget.time?.toString() ?? '',
+                DateHelper.getReadableDate(widget.time),
                 style: TextStyles.heading7Regular(
                   color: CustomColors.darkGrey.withOpacity(0.6),
                 ),
