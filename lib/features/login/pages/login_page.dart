@@ -14,6 +14,8 @@ class LoginPage extends StatelessWidget {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  final authManager = Get.find<AuthenticationManager>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,17 +50,19 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 238.w),
-            CustomButton.info(
-              text: 'Sign In',
-              margin: EdgeInsets.zero,
-              onTap: () {
-                // TODO(adityandar): change to logic of login
-                Get.find<AuthenticationManager>().signIn(
-                  username: 'a',
-                  password: 'b',
-                );
-                // Get.offNamedUntil(mainPageRoute, (route) => false);
-              },
+            Obx(
+              () => CustomButton.info(
+                text: 'Sign In',
+                margin: EdgeInsets.zero,
+                isLoading: authManager.isLoginLoading.value,
+                onTap: () {
+                  Get.find<AuthenticationManager>().signIn(
+                    username: _usernameController.text,
+                    password: _passwordController.text,
+                  );
+                  // Get.offNamedUntil(mainPageRoute, (route) => false);
+                },
+              ),
             ),
             SizedBox(height: 32.w),
             RowTextButton(

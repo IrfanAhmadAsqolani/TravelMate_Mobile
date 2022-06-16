@@ -1,14 +1,16 @@
 import 'package:travelmate/dependencies/dependencies.dart';
+import 'package:travelmate/features/login/pages/login_page.dart';
+import 'package:travelmate/features/main_page/main_page.dart';
 import 'package:travelmate/network/network.dart';
 
 class AuthenticationManager extends GetxController with CacheManager {
   final isLogged = false.obs;
-  final isLoading = false.obs;
+  final isLoginLoading = false.obs;
+  final isRegisterLoading = false.obs;
 
   @override
   void onInit() {
     super.onInit();
-    print("A");
     checkLoginStatus();
   }
 
@@ -24,29 +26,46 @@ class AuthenticationManager extends GetxController with CacheManager {
 
   void checkLoginStatus() {
     final token = getToken();
-    if (token != null) {
-      isLogged.value = true;
-    }
+    Future.delayed(const Duration(milliseconds: 500)).then((_) {
+      if (token != null) {
+        Get.offNamedUntil(mainPageRoute, (route) => false);
+      } else {
+        Get.offNamedUntil(loginPageRoute, (route) => false);
+      }
+    });
   }
 
   Future<void> signIn({
     required String username,
     required String password,
   }) async {
-    isLoading.value = true;
+    isLoginLoading.value = true;
     try {
-      final response = await Api().dio.post(
+      final res = await Api().dio.post(
         'login',
         data: {
           'username': username,
           'password': password,
         },
       );
-      print(response);
+      if (res.data != null) {
+        final response = res.data as Map<String, dynamic>;
+        saveToken(response['token']);
+        Get.offNamedUntil(mainPageRoute, (route) => false);
+      } else {
+        throw '';
+      }
     } on DioError catch (e) {
-      print(e);
+      Get.snackbar('Error', 'Gagal login');
+    } catch (e) {
+      Get.snackbar('Error', 'Gagal login');
     }
 
-    isLoading.value = false;
+    isLoginLoading.value = false;
+  }
+
+  void signOut() {
+    logOut();
+    Get.offNamedUntil(loginPageRoute, (route) => false);
   }
 }

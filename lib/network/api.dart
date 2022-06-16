@@ -13,14 +13,16 @@ class Api {
   factory Api() => _singleton;
 
   static Dio createDio() {
-    var dio = Dio(BaseOptions(
-      baseUrl: _apiUrl,
-      receiveTimeout: 15000, // 15 seconds
-      connectTimeout: 15000,
-      sendTimeout: 15000,
-      contentType: Headers.formUrlEncodedContentType,
-      responseType: ResponseType.json,
-    ));
+    var dio = Dio(
+      BaseOptions(
+        baseUrl: _apiUrl,
+        receiveTimeout: 15000, // 15 seconds
+        connectTimeout: 15000,
+        sendTimeout: 15000,
+        contentType: Headers.jsonContentType,
+        responseType: ResponseType.json,
+      ),
+    );
 
     dio.interceptors.addAll({
       AppInterceptors(dio),
@@ -39,10 +41,10 @@ class AppInterceptors extends Interceptor with CacheManager {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    // var userToken = getToken();
-    var userToken = '1|ZOCnKFWf7XG3SLCUn1aBWuNbP8LwEkRiOz9saS2Q';
+    var userToken = getToken();
     if (userToken != null) {
       options.headers['Authorization'] = 'Bearer $userToken';
+      options.headers['Accept'] = 'application/json';
     }
 
     return handler.next(options);

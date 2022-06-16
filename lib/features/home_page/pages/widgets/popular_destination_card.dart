@@ -2,25 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:travelmate/dependencies/dependencies.dart';
 import 'package:travelmate/features/destination_detail/pages/destination_detail_page.dart';
 
+import '../../../../models/models.dart';
 import '../../../../utils/utils.dart';
 
 class PopularDestinationCard extends StatelessWidget {
   const PopularDestinationCard({
     Key? key,
-    required this.name,
-    required this.location,
-    required this.imgUrl,
+    required this.destination,
   }) : super(key: key);
 
-  final String name;
-  final String location;
-  final String imgUrl;
+  final DestinationMdl destination;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.toNamed(destinationDetailPageRoute);
+        Get.toNamed(
+          destinationDetailPageRoute,
+          arguments: destination,
+        );
       },
       child: Container(
         width: 200.w,
@@ -45,7 +45,7 @@ class PopularDestinationCard extends StatelessWidget {
                 image: DecorationImage(
                   fit: BoxFit.cover,
                   image: NetworkImage(
-                    imgUrl,
+                    destination.imageUrl,
                   ),
                 ),
               ),
@@ -54,7 +54,7 @@ class PopularDestinationCard extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 15.w),
               child: Text(
-                name,
+                destination.name,
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 16,
@@ -64,7 +64,7 @@ class PopularDestinationCard extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 15.w),
               child: Text(
-                location,
+                destination.provinceId.toString(),
                 style: TextStyle(
                   fontSize: 12,
                 ),

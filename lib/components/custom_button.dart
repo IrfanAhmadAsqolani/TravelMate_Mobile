@@ -101,13 +101,15 @@ class CustomButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(14.r),
         ),
-        child: child ??
-            Text(
-              text,
-              style: TextStyles.heading5SemiBold(
-                color: CustomColors.white,
-              ),
-            ),
+        child: isLoading
+            ? const CircularProgressIndicator()
+            : child ??
+                Text(
+                  text,
+                  style: TextStyles.heading5SemiBold(
+                    color: CustomColors.white,
+                  ),
+                ),
       ),
     );
   }

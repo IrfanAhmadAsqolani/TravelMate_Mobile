@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travelmate/utils/utils.dart';
 
-import 'authentication/authentication.dart';
 import 'dependencies/dependencies.dart';
 
 void main() async {
@@ -11,8 +10,6 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
-
-  final AuthenticationManager _authManager = Get.put(AuthenticationManager());
 
   @override
   Widget build(BuildContext context) {

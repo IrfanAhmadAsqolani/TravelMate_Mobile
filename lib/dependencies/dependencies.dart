@@ -7,3 +7,4 @@ export 'package:get/get.dart' hide FormData, Response, MultipartFile;
 export 'package:get_storage/get_storage.dart';
 export 'package:intl/intl.dart';
 export 'package:shared_preferences/shared_preferences.dart';
+export 'package:shimmer/shimmer.dart';

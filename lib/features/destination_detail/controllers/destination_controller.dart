@@ -5,18 +5,24 @@ import '../../../models/models.dart';
 
 class DestinationController extends GetxController {
   var invitations = <InvitationMdl>[].obs;
-  var isLoading = true.obs;
+  var isLoading = false.obs;
 
   @override
   void onInit() async {
+    super.onInit();
+    loadData();
+  }
+
+  void loadData() {
     getInvitations();
   }
 
   Future<void> getInvitations() async {
+    isLoading.value = true;
     final repository = DestinationDetailRepositoryImpl();
     try {
       final response = await repository.getAllInvitations();
-      invitations = RxList.from(response.allInvitations);
+      invitations.value = RxList.from(response.allInvitations);
       isLoading.value = false;
     } on DioError catch (e) {
       throw e.toString();

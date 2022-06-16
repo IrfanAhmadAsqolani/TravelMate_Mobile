@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travelmate/dependencies/dependencies.dart';
+import 'package:travelmate/features/home_page/controllers/home_controller.dart';
 
 import 'views/views.dart';
 
@@ -10,6 +11,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(HomeController());
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
