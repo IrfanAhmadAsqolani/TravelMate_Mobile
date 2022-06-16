@@ -3,6 +3,7 @@
 import 'package:travelmate/features/home_page/pages/home_page.dart';
 import 'package:travelmate/features/main_page/main_page.dart';
 import 'package:travelmate/features/onboarding/pages/onboarding_page.dart';
+import 'package:travelmate/features/profile/pages/profile.dart';
 import 'package:travelmate/features/splash/pages/splash_page.dart';
 
 import '../../dependencies/dependencies.dart';
@@ -58,6 +59,10 @@ class Routes {
       GetPage(
         name: invitationEditPageRoute,
         page: () => InvitationEditPage(),
+      ),
+      GetPage(
+        name: profilePageRoute,
+        page: () => ProfilePage(),
       ),
     ];
   }
