@@ -1,3 +1,3 @@
 export 'api.dart';
+export 'cache_manager.dart';
 export 'errors.dart';
-export 'shared_preferences.dart';

@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:travelmate/features/login/pages/login_page.dart';
 import 'package:travelmate/utils/utils.dart';
 
+import 'authentication/authentication.dart';
 import 'dependencies/dependencies.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  await GetStorage.init();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
+
+  final AuthenticationManager _authManager = Get.put(AuthenticationManager());
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +28,7 @@ class MyApp extends StatelessWidget {
             fontFamily: 'SFPro',
           ),
           getPages: Routes.pages(),
-          initialRoute: loginPageRoute,
+          // initialRoute: loginPageRoute,
         );
       },
     );

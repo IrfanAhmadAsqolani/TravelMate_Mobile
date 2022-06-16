@@ -1,7 +1,7 @@
 import '../dependencies/dependencies.dart';
 import 'network.dart';
 
-const String _apiUrl = 'http://travelmate.masuk.id/api/';
+const String _apiUrl = 'https://travelmate.masuk.id/api/';
 
 class Api {
   final dio = createDio();
@@ -18,7 +18,7 @@ class Api {
       receiveTimeout: 15000, // 15 seconds
       connectTimeout: 15000,
       sendTimeout: 15000,
-      contentType: Headers.jsonContentType,
+      contentType: Headers.formUrlEncodedContentType,
       responseType: ResponseType.json,
     ));
 
@@ -29,7 +29,7 @@ class Api {
   }
 }
 
-class AppInterceptors extends Interceptor {
+class AppInterceptors extends Interceptor with CacheManager {
   final Dio dio;
 
   AppInterceptors(this.dio);
@@ -39,7 +39,8 @@ class AppInterceptors extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    var userToken = await SharedPref.getUserToken();
+    // var userToken = getToken();
+    var userToken = '1|ZOCnKFWf7XG3SLCUn1aBWuNbP8LwEkRiOz9saS2Q';
     if (userToken != null) {
       options.headers['Authorization'] = 'Bearer $userToken';
     }
