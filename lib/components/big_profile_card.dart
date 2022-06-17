@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travelmate/dependencies/dependencies.dart';
 import 'package:travelmate/gen/assets.gen.dart';
+import 'package:travelmate/models/models.dart';
 
 import '../helpers/helpers.dart';
 import '../utils/utils.dart';
@@ -8,14 +9,10 @@ import '../utils/utils.dart';
 class BigProfileCard extends StatefulWidget {
   const BigProfileCard({
     Key? key,
-    this.name = '',
-    this.imgUrl = '',
-    this.time,
+    this.user,
   }) : super(key: key);
 
-  final String name;
-  final String imgUrl;
-  final DateTime? time;
+  final UserMdl? user;
 
   @override
   State<BigProfileCard> createState() => _BigProfileCardState();
@@ -36,7 +33,7 @@ class _BigProfileCardState extends State<BigProfileCard> {
               )
             : CircleAvatar(
                 radius: 40.w,
-                backgroundImage: NetworkImage(widget.imgUrl),
+                backgroundImage: NetworkImage(widget.user?.pictImageUrl ?? ''),
                 backgroundColor: Colors.transparent,
                 onBackgroundImageError: (_, __) {
                   isError = true;
@@ -50,11 +47,11 @@ class _BigProfileCardState extends State<BigProfileCard> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                widget.name,
+                widget.user?.fullName ?? '',
                 style: TextStyles.heading4(),
               ),
               Text(
-                DateHelper.getReadableDate(widget.time),
+                DateHelper.getReadableDate(widget.user?.createdAt),
                 style: TextStyles.heading6(
                   color: CustomColors.darkGrey.withOpacity(0.6),
                 ),
