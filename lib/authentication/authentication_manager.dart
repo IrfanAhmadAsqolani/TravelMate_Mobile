@@ -3,6 +3,8 @@ import 'package:travelmate/features/login/pages/login_page.dart';
 import 'package:travelmate/features/main_page/main_page.dart';
 import 'package:travelmate/network/network.dart';
 
+import '../models/models.dart';
+
 class AuthenticationManager extends GetxController with CacheManager {
   final isLogged = false.obs;
   final isLoginLoading = false.obs;
@@ -36,18 +38,14 @@ class AuthenticationManager extends GetxController with CacheManager {
   }
 
   Future<void> signIn({
-    required String username,
-    required String password,
+    required LoginParam param,
   }) async {
     isLoginLoading.value = true;
     try {
       final res = await Api().dio.post(
-        'login',
-        data: {
-          'username': username,
-          'password': password,
-        },
-      );
+            'login',
+            data: param.toMap(),
+          );
       if (res.data != null) {
         final response = res.data as Map<String, dynamic>;
         saveToken(response['token']);

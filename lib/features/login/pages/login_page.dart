@@ -5,6 +5,7 @@ import 'package:travelmate/dependencies/dependencies.dart';
 import 'package:travelmate/features/register/pages/register_page.dart';
 import 'package:travelmate/utils/utils.dart';
 
+import '../../../models/models.dart';
 import 'widgets/widgets.dart';
 
 const String loginPageRoute = '/login-page';
@@ -57,8 +58,10 @@ class LoginPage extends StatelessWidget {
                 isLoading: authManager.isLoginLoading.value,
                 onTap: () {
                   Get.find<AuthenticationManager>().signIn(
-                    username: _usernameController.text,
-                    password: _passwordController.text,
+                    param: LoginParam(
+                      username: _usernameController.text,
+                      password: _passwordController.text,
+                    ),
                   );
                   // Get.offNamedUntil(mainPageRoute, (route) => false);
                 },
