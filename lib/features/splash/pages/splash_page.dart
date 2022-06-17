@@ -6,10 +6,8 @@ import '../../../dependencies/dependencies.dart';
 const String splashPageRoute = '/';
 
 class SplashPage extends StatelessWidget {
-  final AuthenticationManager _authManager = Get.put(AuthenticationManager());
-
   Future<void> initializeSettings() async {
-    _authManager.checkLoginStatus();
+    Get.find<AuthenticationManager>().checkLoginStatus();
 
     //Simulate other services for 3 seconds
     await Future.delayed(Duration(seconds: 3));
