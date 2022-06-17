@@ -55,7 +55,7 @@ class AuthenticationManager extends GetxController with CacheManager {
       } else {
         throw '';
       }
-    } on DioError catch (e) {
+    } on DioError catch (_) {
       Get.snackbar('Error', 'Gagal login');
     } catch (e) {
       Get.snackbar('Error', 'Gagal login');
