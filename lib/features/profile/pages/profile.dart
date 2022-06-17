@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:travelmate/dependencies/dependencies.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:travelmate/features/login/pages/login_page.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../components/components.dart';
+import '../../../models/models.dart';
 import '../../../utils/utils.dart';
 import '../../my_invitation/pages/my_invitation_page.dart';
 
@@ -34,10 +35,11 @@ class _ProfilePageState extends State<ProfilePage> {
               Padding(
                   padding: EdgeInsets.symmetric(horizontal: 35.w),
                   child: BigProfileCard(
-                    name: 'Bagus Seno',
-                    imgUrl:
-                        'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHw%3D&w=1000&q=80',
-                    time: DateTime.now(),
+                    user: UserMdl(
+                      fullName: 'baguS seno',
+                      pictUrl:
+                          'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHw%3D&w=1000&q=80',
+                    ),
                   )),
               SizedBox(height: 40.w),
               Column(

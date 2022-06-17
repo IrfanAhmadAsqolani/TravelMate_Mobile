@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:travelmate/dependencies/dependencies.dart';
 
 import '../../../components/components.dart';
 import '../../../gen/assets.gen.dart';
+import '../../../models/models.dart';
 import '../../../utils/utils.dart';
 import '../../invitation_edit/pages/invitation_edit_page.dart';
 
@@ -65,10 +64,11 @@ class MyInvitationDetailPage extends StatelessWidget {
                     style: TextStyles.heading5Regular(),
                   ),
                   SizedBox(height: 10.w),
-                  SmallProfileCard(
-                    name: 'You',
-                    time: DateTime.now(),
-                    imgUrl: 'https://via.placeholder.com/150',
+                  const SmallProfileCard(
+                    user: UserMdl(
+                      fullName: 'You',
+                      pictUrl: 'https://via.placeholder.com/150',
+                    ),
                   ),
                   SizedBox(height: 10.w),
                   CustomOutlinedButton.info(
@@ -152,9 +152,10 @@ class RequestCard extends StatelessWidget {
               children: [
                 Expanded(
                   child: SmallProfileCard(
-                    name: 'Cameron Steward',
-                    time: DateTime.now(),
-                    imgUrl: 'https://via.placeholder.com/150',
+                    user: UserMdl(
+                      fullName: 'Cameron Steward',
+                      pictUrl: 'https://via.placeholder.com/150',
+                    ),
                   ),
                 ),
                 InkWell(
