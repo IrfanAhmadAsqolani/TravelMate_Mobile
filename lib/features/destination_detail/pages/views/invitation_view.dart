@@ -6,9 +6,7 @@ import '../../../../dependencies/dependencies.dart';
 import '../../../../utils/utils.dart';
 
 class InvitationView extends StatelessWidget {
-  InvitationView({
-    Key? key,
-  }) : super(key: key);
+  InvitationView({Key? key}) : super(key: key);
 
   final destinationController = Get.find<DestinationController>();
   @override
@@ -37,9 +35,11 @@ class InvitationView extends StatelessWidget {
             itemCount: destinationController.invitations.length,
           );
         }
-        return Text(
-          'There is no available invitation',
-          style: TextStyles.heading5Regular(),
+        return Center(
+          child: Text(
+            'There is no available invitation',
+            style: TextStyles.heading5Regular(),
+          ),
         );
       },
     );
