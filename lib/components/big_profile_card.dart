@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:travelmate/dependencies/dependencies.dart';
 import 'package:travelmate/gen/assets.gen.dart';
@@ -19,27 +20,23 @@ class BigProfileCard extends StatefulWidget {
 }
 
 class _BigProfileCardState extends State<BigProfileCard> {
-  bool isError = false;
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        isError
-            ? CircleAvatar(
-                radius: 40.w,
-                backgroundImage: AssetImage(
-                  Assets.images.imgPersonDefault.path,
-                ),
-              )
-            : CircleAvatar(
-                radius: 40.w,
-                backgroundImage: NetworkImage(widget.user?.pictImageUrl ?? ''),
-                backgroundColor: Colors.transparent,
-                onBackgroundImageError: (_, __) {
-                  isError = true;
-                  setState(() {});
-                },
+        CachedNetworkImage(
+          imageUrl: widget.user?.pictImageUrl ?? '',
+          width: 40.w,
+          height: 40.w,
+          errorWidget: (_, __, ___) {
+            return CircleAvatar(
+              radius: 40.w,
+              backgroundImage: AssetImage(
+                Assets.images.imgPersonDefault.path,
               ),
+            );
+          },
+        ),
         SizedBox(width: 12.w),
         Expanded(
           child: Column(
