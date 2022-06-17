@@ -74,9 +74,7 @@ class _InvitationDetailPageState extends State<InvitationDetailPage> {
                 ),
                 SizedBox(height: 10.w),
                 SmallProfileCard(
-                  name: 'Cameron Steward',
-                  time: DateTime.now(),
-                  imgUrl: 'https://via.placeholder.com/150',
+                  user: invitation?.owner,
                 ),
                 SizedBox(height: 10.w),
                 Container(
