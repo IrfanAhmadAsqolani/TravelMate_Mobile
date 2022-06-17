@@ -53,7 +53,7 @@ class RecommendedPlaceCard extends StatelessWidget {
                 children: [
                   SizedBox(height: 10.w),
                   Text(
-                    destination.name,
+                    destination.name ?? '',
                     style: const TextStyle(
                       fontWeight: FontWeight.w800,
                       fontSize: 16,
