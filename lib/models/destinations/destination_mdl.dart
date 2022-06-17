@@ -1,12 +1,13 @@
+import '../../constants/constants.dart';
 import '../../dependencies/dependencies.dart';
 
 class DestinationMdl extends Equatable {
-  final int id;
-  final int provinceId;
-  final String name;
-  final String imgUrl;
-  final String desc;
-  final int categoryId;
+  final int? id;
+  final int? provinceId;
+  final String? name;
+  final String? imgUrl;
+  final String? desc;
+  final int? categoryId;
 
   const DestinationMdl({
     required this.id,
@@ -18,7 +19,7 @@ class DestinationMdl extends Equatable {
   });
 
   String get imageUrl =>
-      'http://travelmate.masuk.id/storage/app/public/destinations/$imgUrl';
+      '${CommonConstant.networkImageBaseUrl}destinations/$imgUrl';
 
   DestinationMdl copyWith({
     int? id,
@@ -64,7 +65,7 @@ class DestinationMdl extends Equatable {
   bool get stringify => true;
 
   @override
-  List<Object> get props {
+  List<Object?> get props {
     return [
       id,
       provinceId,

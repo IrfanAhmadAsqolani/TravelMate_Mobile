@@ -1,15 +1,20 @@
 import '../../../dependencies/dependencies.dart';
+import '../../../helpers/helpers.dart';
+import '../../models.dart';
 
 class InvitationMdl extends Equatable {
-  final int id;
-  final int destinationId;
-  final int ownerId;
-  final int maxTeam;
-  final String title;
-  final String description;
-  final String groupUrl;
+  final int? id;
+  final int? destinationId;
+  final int? ownerId;
+  final int? maxTeam;
+  final String? title;
+  final String? description;
+  final String? groupUrl;
   final DateTime? createdAt;
   final DateTime? updatedAt;
+  final DateTime? departDate;
+  final UserMdl? owner;
+  final DestinationMdl? destination;
 
   const InvitationMdl({
     required this.id,
@@ -21,7 +26,12 @@ class InvitationMdl extends Equatable {
     required this.groupUrl,
     required this.createdAt,
     required this.updatedAt,
+    required this.departDate,
+    required this.owner,
+    required this.destination,
   });
+
+  bool get isOpen => DateHelper.isBeforeToday(departDate);
 
   InvitationMdl copyWith({
     int? id,
@@ -33,6 +43,9 @@ class InvitationMdl extends Equatable {
     String? groupUrl,
     DateTime? createdAt,
     DateTime? updatedAt,
+    DateTime? departDate,
+    UserMdl? owner,
+    DestinationMdl? destination,
   }) {
     return InvitationMdl(
       id: id ?? this.id,
@@ -44,6 +57,9 @@ class InvitationMdl extends Equatable {
       groupUrl: groupUrl ?? this.groupUrl,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
+      owner: owner ?? this.owner,
+      destination: destination ?? this.destination,
+      departDate: departDate ?? this.departDate,
     );
   }
 
@@ -58,6 +74,9 @@ class InvitationMdl extends Equatable {
       'groupUrl': groupUrl,
       'createdAt': createdAt,
       'updatedAt': updatedAt,
+      'departDate': departDate,
+      'owner': owner?.toMap(),
+      'destination': destination?.toMap(),
     };
   }
 
@@ -72,6 +91,11 @@ class InvitationMdl extends Equatable {
       groupUrl: map['group_link'],
       createdAt: DateTime.tryParse(map['created_at']),
       updatedAt: DateTime.tryParse(map['updated_at']),
+      departDate: DateTime.tryParse(map['depart_date']),
+      owner: (map['owner'] != null) ? UserMdl.fromMap(map['owner']) : null,
+      destination: (map['destination'] != null)
+          ? DestinationMdl.fromMap(map['destination'])
+          : null,
     );
   }
 
@@ -89,6 +113,9 @@ class InvitationMdl extends Equatable {
       groupUrl,
       createdAt,
       updatedAt,
+      departDate,
+      owner,
+      destination,
     ];
   }
 }
