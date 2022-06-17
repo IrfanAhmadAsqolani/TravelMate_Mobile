@@ -19,7 +19,9 @@ class DestinationDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final destinationController = Get.put(DestinationController());
+    final destinationController = Get.put(DestinationController(
+      destinationId: destination.id,
+    ));
 
     return Scaffold(
       body: Stack(
@@ -32,7 +34,7 @@ class DestinationDetailPage extends StatelessWidget {
                 children: [
                   SizedBox(height: 52.w),
                   CenterTitleWithBack(
-                    title: destination?.name ?? '',
+                    title: destination.name ?? '',
                   ),
                   SizedBox(height: 35.w),
                   Container(
@@ -41,7 +43,7 @@ class DestinationDetailPage extends StatelessWidget {
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: NetworkImage(
-                          destination?.imageUrl ?? '',
+                          destination.imageUrl,
                         ),
                         fit: BoxFit.cover,
                       ),
@@ -54,13 +56,13 @@ class DestinationDetailPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         CategoryChip(
-                          title: '${destination?.categoryId}',
+                          title: '${destination.categoryId}',
                           color: Color(0xFF7FDFFE),
                         ),
                         SizedBox(width: 12.w),
                         Text(
                           // TODO(adityandar): change to province name
-                          destination?.provinceId.toString() ?? '',
+                          destination.provinceId.toString(),
                           style: TextStyles.heading5SemiBold(),
                         ),
                       ],
@@ -70,7 +72,7 @@ class DestinationDetailPage extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 28.w),
                     child: Text(
-                      destination?.desc ?? '',
+                      destination.desc ?? '',
                       style: TextStyles.heading5Regular(),
                     ),
                   ),
