@@ -74,7 +74,7 @@ class UserMdl extends Equatable {
     return <String, dynamic>{
       'id': id,
       'username': username,
-      'fullName': fullName,
+      'fullname': fullName,
       'identityNumber': identityNumber,
       'pending': pending,
       'verificationStatus': verificationStatus?.name,
@@ -92,7 +92,7 @@ class UserMdl extends Equatable {
     return UserMdl(
       id: map['id'],
       username: map['username'],
-      fullName: map['fullName'],
+      fullName: map['fullname'],
       identityNumber: map['identity_number'],
       pending: map['pending'],
       verificationStatus: VerificationStatus.values.firstWhere(

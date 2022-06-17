@@ -3,19 +3,16 @@ import 'package:travelmate/dependencies/dependencies.dart';
 import 'package:travelmate/helpers/helpers.dart';
 
 import '../gen/assets.gen.dart';
+import '../models/models.dart';
 import '../utils/utils.dart';
 
 class SmallProfileCard extends StatefulWidget {
   const SmallProfileCard({
     Key? key,
-    this.name = '',
-    this.imgUrl = '',
-    this.time,
+    this.user,
   }) : super(key: key);
 
-  final String name;
-  final String imgUrl;
-  final DateTime? time;
+  final UserMdl? user;
 
   @override
   State<SmallProfileCard> createState() => _SmallProfileCardState();
@@ -36,7 +33,7 @@ class _SmallProfileCardState extends State<SmallProfileCard> {
               )
             : CircleAvatar(
                 radius: 20.w,
-                backgroundImage: NetworkImage(widget.imgUrl),
+                backgroundImage: NetworkImage(widget.user?.pictImageUrl ?? ''),
                 backgroundColor: Colors.transparent,
                 onBackgroundImageError: (_, __) {
                   isError = true;
@@ -50,11 +47,11 @@ class _SmallProfileCardState extends State<SmallProfileCard> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                widget.name,
+                widget.user?.fullName ?? '',
                 style: TextStyles.heading5Regular(),
               ),
               Text(
-                DateHelper.getReadableDate(widget.time),
+                DateHelper.getReadableDate(widget.user?.createdAt),
                 style: TextStyles.heading7Regular(
                   color: CustomColors.darkGrey.withOpacity(0.6),
                 ),
