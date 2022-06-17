@@ -15,26 +15,30 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 31.w),
-              Padding(
-                padding: EdgeInsets.only(left: 26.w),
-                child: const Text(
-                  'Explore Now!',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 28,
+        child: RefreshIndicator(
+          onRefresh: () async => Get.find<HomeController>().loadData(),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 31.w),
+                Padding(
+                  padding: EdgeInsets.only(left: 26.w),
+                  child: const Text(
+                    'Explore Now!',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 28,
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: 21.w),
-              PopularDestinationView(),
-              SizedBox(height: 21.w),
-              RecommendedPlaceView(),
-            ],
+                SizedBox(height: 21.w),
+                PopularDestinationView(),
+                SizedBox(height: 21.w),
+                RecommendedPlaceView(),
+                SizedBox(height: 50.w),
+              ],
+            ),
           ),
         ),
       ),

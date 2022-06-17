@@ -54,7 +54,7 @@ class PopularDestinationCard extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 15.w),
               child: Text(
-                destination.name,
+                destination.name ?? '',
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 16,
@@ -64,7 +64,7 @@ class PopularDestinationCard extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 15.w),
               child: Text(
-                destination.provinceId.toString(),
+                destination.provinceId?.toString() ?? '',
                 style: TextStyle(
                   fontSize: 12,
                 ),
