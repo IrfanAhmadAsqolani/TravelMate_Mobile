@@ -7,4 +7,11 @@ class DateHelper {
     }
     return DateFormat(format ?? 'dd MMMM yyyy').format(date);
   }
+
+  static bool isBeforeToday(DateTime? date) {
+    if (date == null) {
+      return false;
+    }
+    return date.difference(DateTime.now()).inDays > 0;
+  }
 }
