@@ -40,17 +40,17 @@ class InvitationCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    invitation.title,
+                    invitation.title ?? '',
                     style: TextStyles.heading5SemiBold(),
                   ),
                   SizedBox(height: 5.w),
                   Text(
-                    DateHelper.getReadableDate(invitation.createdAt),
+                    DateHelper.getReadableDate(invitation.departDate),
                     style: TextStyles.heading7Regular(),
                   ),
                   SizedBox(height: 5.w),
                   Text(
-                    'Created by ${invitation.ownerId}',
+                    'Created by ${invitation.owner?.username ?? ''}',
                     style: TextStyles.heading7Regular(
                       color: CustomColors.grey,
                     ),
@@ -59,7 +59,7 @@ class InvitationCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      StatusChip(isOpen: true),
+                      StatusChip(isOpen: invitation.isOpen),
                       SizedBox(width: 9.w),
                       Text(
                         '${invitation.maxTeam} Persons',
