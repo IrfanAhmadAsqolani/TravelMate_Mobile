@@ -18,6 +18,7 @@ class HomePage extends StatelessWidget {
         child: RefreshIndicator(
           onRefresh: () async => Get.find<HomeController>().loadData(),
           child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
