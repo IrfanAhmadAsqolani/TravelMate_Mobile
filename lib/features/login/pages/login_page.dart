@@ -6,7 +6,6 @@ import 'package:travelmate/features/register/pages/register_page.dart';
 import 'package:travelmate/utils/utils.dart';
 
 import '../../../models/models.dart';
-import 'widgets/widgets.dart';
 
 const String loginPageRoute = '/login-page';
 
@@ -45,10 +44,8 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: 6.w),
             TextFormField(
               controller: _passwordController,
-              decoration:
-                  CustomInputDecoration.defaultDecoration('Password').copyWith(
-                suffix: const ForgotPasswordButton(),
-              ),
+              obscureText: true,
+              decoration: CustomInputDecoration.defaultDecoration('Password'),
             ),
             SizedBox(height: 238.w),
             Obx(
@@ -63,7 +60,6 @@ class LoginPage extends StatelessWidget {
                       password: _passwordController.text,
                     ),
                   );
-                  // Get.offNamedUntil(mainPageRoute, (route) => false);
                 },
               ),
             ),

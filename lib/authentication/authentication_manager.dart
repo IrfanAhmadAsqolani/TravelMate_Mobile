@@ -1,6 +1,7 @@
 import 'package:travelmate/dependencies/dependencies.dart';
 import 'package:travelmate/features/login/pages/login_page.dart';
 import 'package:travelmate/features/main_page/main_page.dart';
+import 'package:travelmate/features/onboarding/pages/onboarding_page.dart';
 import 'package:travelmate/network/network.dart';
 
 import '../models/models.dart';
@@ -49,8 +50,7 @@ class AuthenticationManager extends GetxController with CacheManager {
           );
       if (res.data != null) {
         final response = res.data as Map<String, dynamic>;
-        saveToken(response['token']);
-        await getMyDetailFromNetworkAndSaveToLocal();
+        saveTokenAndGetDetailFromNetworkAndSaveToLocal(response['token']);
         Get.offNamedUntil(mainPageRoute, (route) => false);
       } else {
         throw '';
@@ -62,6 +62,29 @@ class AuthenticationManager extends GetxController with CacheManager {
     }
 
     isLoginLoading.value = false;
+  }
+
+  Future<void> register({required RegisterParam param}) async {
+    isRegisterLoading.value = true;
+    try {
+      final res = await Api().dio.post(
+            'users',
+            data: param.toMap(),
+          );
+      if (res.data != null) {
+        final response = res.data as Map<String, dynamic>;
+        saveTokenAndGetDetailFromNetworkAndSaveToLocal(response['token']);
+        Get.offNamedUntil(onboardingPageRoute, (route) => false);
+      } else {
+        throw '';
+      }
+    } on DioError catch (e) {
+      Get.snackbar('Error', 'Gagal register');
+    } catch (e) {
+      Get.snackbar('Error', 'Gagal register');
+    }
+
+    isRegisterLoading.value = false;
   }
 
   Future<void> getMyDetailFromNetworkAndSaveToLocal() async {
@@ -81,6 +104,12 @@ class AuthenticationManager extends GetxController with CacheManager {
     } catch (_) {
       Get.snackbar('Error', 'Failed to fetch information');
     }
+  }
+
+  Future<void> saveTokenAndGetDetailFromNetworkAndSaveToLocal(
+      String token) async {
+    await saveToken(token);
+    await getMyDetailFromNetworkAndSaveToLocal();
   }
 
   void signOut() {
