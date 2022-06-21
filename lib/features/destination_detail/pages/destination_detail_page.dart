@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:travelmate/dependencies/dependencies.dart';
 import 'package:travelmate/features/invitation_create/pages/invitation_create_page.dart';
+import 'package:travelmate/features/maps/maps_page.dart';
 import 'package:travelmate/utils/utils.dart';
 
 import '../../../components/components.dart';
+import '../../../gen/assets.gen.dart';
 import '../../../models/models.dart';
 import '../controllers/controllers.dart';
 import 'views/views.dart';
@@ -33,8 +35,34 @@ class DestinationDetailPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 52.w),
-                  CenterTitleWithBack(
-                    title: destination.name ?? '',
+                  Stack(
+                    children: [
+                      CenterTitleWithBack(
+                        title: destination.name ?? '',
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Padding(
+                          padding: EdgeInsets.only(right: 27.w),
+                          child: GestureDetector(
+                            onTap: () {
+                              Get.toNamed(
+                                mapsPageRoute,
+                                arguments: MapsParam(
+                                  locationName: destination.name,
+                                  latitude: destination.latitude,
+                                  longitude: destination.longitude,
+                                ),
+                              );
+                            },
+                            child: SvgPicture.asset(
+                              // TODO(adityandar): change to map?
+                              Assets.icons.icInvitation,
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                   SizedBox(height: 35.w),
                   Container(
