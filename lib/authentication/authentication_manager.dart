@@ -19,6 +19,7 @@ class AuthenticationManager extends GetxController with CacheManager {
   void logOut() {
     isLogged.value = false;
     removeToken();
+    removeUserData();
   }
 
   void login(String? token) async {
@@ -49,6 +50,7 @@ class AuthenticationManager extends GetxController with CacheManager {
       if (res.data != null) {
         final response = res.data as Map<String, dynamic>;
         saveToken(response['token']);
+        await getMyDetailFromNetworkAndSaveToLocal();
         Get.offNamedUntil(mainPageRoute, (route) => false);
       } else {
         throw '';
@@ -60,6 +62,25 @@ class AuthenticationManager extends GetxController with CacheManager {
     }
 
     isLoginLoading.value = false;
+  }
+
+  Future<void> getMyDetailFromNetworkAndSaveToLocal() async {
+    try {
+      final res = await Api().dio.get('users/me');
+      if (res.data != null) {
+        final response = res.data as Map<String, dynamic>;
+
+        final userData = UserMdl.fromMap(response);
+        saveUserData(userData);
+      } else {
+        Get.offNamedUntil(loginPageRoute, (route) => false);
+        throw '';
+      }
+    } on DioError catch (_) {
+      Get.snackbar('Error', 'Failed to fetch information');
+    } catch (_) {
+      Get.snackbar('Error', 'Failed to fetch information');
+    }
   }
 
   void signOut() {
