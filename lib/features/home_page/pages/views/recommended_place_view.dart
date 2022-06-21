@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:travelmate/dependencies/dependencies.dart';
 import 'package:travelmate/dummy/recommended_places_dummy.dart';
 import 'package:travelmate/features/home_page/controllers/home_controller.dart';
+import 'package:travelmate/features/onboarding/pages/onboarding_page.dart';
 
 import '../../../../components/components.dart';
 import '../../../../utils/utils.dart';
@@ -30,6 +31,25 @@ class RecommendedPlaceView extends StatelessWidget {
         ),
         SizedBox(height: 21.w),
         Obx(() {
+          if (homeController.isInterestsEmpty.value) {
+            return Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'You have not select your interests.',
+                    style: TextStyles.heading5Regular(),
+                  ),
+                  SizedBox(height: 48.w),
+                  CustomButton.info(
+                    text: 'Select interests',
+                    onTap: () => Get.toNamed(onboardingPageRoute),
+                    margin: EdgeInsets.symmetric(horizontal: 64.w),
+                  ),
+                ],
+              ),
+            );
+          }
           if (homeController.isLoading.value) {
             return ShimmerContainer(
               width: 1.sw,
@@ -56,8 +76,8 @@ class RecommendedPlaceView extends StatelessWidget {
             } else {
               return Center(
                 child: Text(
-                  'Kosong',
-                  style: TextStyles.heading3(),
+                  'There is no available invitation',
+                  style: TextStyles.heading5Regular(),
                 ),
               );
             }
