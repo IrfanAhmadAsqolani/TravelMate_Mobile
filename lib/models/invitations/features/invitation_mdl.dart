@@ -17,18 +17,18 @@ class InvitationMdl extends Equatable {
   final DestinationMdl? destination;
 
   const InvitationMdl({
-    required this.id,
-    required this.destinationId,
-    required this.ownerId,
-    required this.maxTeam,
-    required this.title,
-    required this.description,
-    required this.groupUrl,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.departDate,
-    required this.owner,
-    required this.destination,
+    this.id,
+    this.destinationId,
+    this.ownerId,
+    this.maxTeam,
+    this.title,
+    this.description,
+    this.groupUrl,
+    this.createdAt,
+    this.updatedAt,
+    this.departDate,
+    this.owner,
+    this.destination,
   });
 
   bool get isOpen => DateHelper.isBeforeToday(departDate);
