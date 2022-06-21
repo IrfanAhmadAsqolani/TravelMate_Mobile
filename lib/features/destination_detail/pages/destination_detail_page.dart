@@ -56,13 +56,12 @@ class DestinationDetailPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         CategoryChip(
-                          title: '${destination.categoryId}',
+                          title: destination.category?.name ?? '',
                           color: Color(0xFF7FDFFE),
                         ),
                         SizedBox(width: 12.w),
                         Text(
-                          // TODO(adityandar): change to province name
-                          destination.provinceId.toString(),
+                          destination.province?.name ?? '',
                           style: TextStyles.heading5SemiBold(),
                         ),
                       ],
