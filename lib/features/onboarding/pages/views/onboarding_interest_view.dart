@@ -22,8 +22,6 @@ class OnboardingInterestView extends StatefulWidget {
 }
 
 class _OnboardingInterestViewState extends State<OnboardingInterestView> {
-  bool ableToContinue = true;
-
   final OnboardingController onboardingController =
       Get.find<OnboardingController>();
 
@@ -47,13 +45,11 @@ class _OnboardingInterestViewState extends State<OnboardingInterestView> {
         ),
         Obx(() {
           if (onboardingController.isLoadLoading.value) {
-            ableToContinue = false;
             return const Center(
               child: CircularProgressIndicator(),
             );
           }
           if (onboardingController.interests.isNotEmpty) {
-            ableToContinue = true;
             return Center(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 42.w),
