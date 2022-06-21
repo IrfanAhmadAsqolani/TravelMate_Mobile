@@ -34,10 +34,22 @@ class UserMdl extends Equatable {
     this.interests,
   });
 
-  String get pictImageUrl =>
-      '${CommonConstant.networkImageBaseUrl}users/$pictUrl';
-  String get identityPictImageUrl =>
-      '${CommonConstant.networkImageBaseUrl}users/$identityPictUrl';
+  String get pictImageUrl {
+    if (pictUrl == '-') {
+      return '';
+    }
+    return '${CommonConstant.networkImageBaseUrl}users/$pictUrl';
+  }
+
+  String get identityPictImageUrl {
+    if (pictUrl == '-') {
+      return '';
+    }
+    return '${CommonConstant.networkImageBaseUrl}users/$identityPictUrl';
+  }
+
+  bool get isInterestEmpty =>
+      interests?[0] == '0' || (interests?.isEmpty ?? true);
 
   UserMdl copyWith({
     int? id,
@@ -85,7 +97,7 @@ class UserMdl extends Equatable {
       'created_at': DateHelper.getReadableDate(createdAt),
       'updated_at': DateHelper.getReadableDate(updatedAt),
       'identity_pict_url': identityPictUrl,
-      'interests': interests?.join(','),
+      'interests': interests?.join(',') ?? '0',
     };
   }
 
