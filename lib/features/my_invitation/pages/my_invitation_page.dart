@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:travelmate/dependencies/dependencies.dart';
+import 'package:travelmate/features/my_invitation/controller/my_invitation_controller.dart';
+import 'package:travelmate/features/my_invitation/pages/views/views.dart';
+
 
 import '../../../components/components.dart';
 
@@ -12,40 +15,24 @@ class MyInvitationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(MyInvitationController());
+
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 35.w),
-              const CenterTitleWithBack(
-                title: 'My Invitation',
-              ),
-              SizedBox(height: 35.w),
-              // TODO(adityandar): uncomment when available
-              // ListView.separated(
-              //   shrinkWrap: true,
-              //   physics: const NeverScrollableScrollPhysics(),
-              //   padding: EdgeInsets.zero,
-              //   itemBuilder: (context, index) {
-              //     return InvitationCard(
-              //       title: 'Touring Santai',
-              //       date: DateTime.now(),
-              //       creator: 'Agus Nur Hasyim',
-              //       isOpen: true,
-              //       number: 10,
-              //       onTap: () {
-              //         Get.toNamed(myInvitationDetailPageRoute);
-              //       },
-              //     );
-              //   },
-              //   separatorBuilder: (context, index) => SizedBox(
-              //     height: 17.w,
-              //   ),
-              //   itemCount: 4,
-              // ),
-            ],
+        child: RefreshIndicator(
+          onRefresh: () async => Get.find<MyInvitationController>().loadData(),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 35.w),
+                const CenterTitleWithBack(
+                  title: 'My Invitation',
+                ),
+                SizedBox(height: 35.w),
+                MyInvitationView(),
+              ],
+            ),
           ),
         ),
       ),
