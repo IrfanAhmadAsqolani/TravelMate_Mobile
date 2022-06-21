@@ -1,18 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:travelmate/authentication/authentication_manager.dart';
 import 'package:travelmate/dependencies/dependencies.dart';
+import 'package:travelmate/features/onboarding/controllers/onboarding_controller.dart';
 import 'package:travelmate/utils/utils.dart';
 
 import '../../../../components/components.dart';
 import '../widgets/widgets.dart';
 
-class OnboardingInterestView extends StatelessWidget {
+String onboardingInterestPageRoute = 'onboarding-interest';
+
+class OnboardingInterestView extends StatefulWidget {
   const OnboardingInterestView({
     Key? key,
     required this.onContinueCallback,
   }) : super(key: key);
 
   final VoidCallback onContinueCallback;
-  final bool ableToContinue = true;
+
+  @override
+  State<OnboardingInterestView> createState() => _OnboardingInterestViewState();
+}
+
+class _OnboardingInterestViewState extends State<OnboardingInterestView> {
+  bool ableToContinue = true;
+
+  final OnboardingController onboardingController =
+      Get.find<OnboardingController>();
 
   @override
   Widget build(BuildContext context) {
@@ -32,68 +45,72 @@ class OnboardingInterestView extends StatelessWidget {
             ],
           ),
         ),
-        Center(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 42.w),
-            child: SizedBox(
-              height: 250.w,
-              width: 1.sw,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    InterestOptionWidget(
-                      title: 'Pantai',
-                      onTap: () {},
+        Obx(() {
+          if (onboardingController.isLoadLoading.value) {
+            ableToContinue = false;
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (onboardingController.interests.isNotEmpty) {
+            ableToContinue = true;
+            return Center(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 42.w),
+                child: SizedBox(
+                  height: 250.w,
+                  width: 1.sw,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: onboardingController.interests
+                          .map(
+                            (interest) => InterestOptionWidget(
+                              category: interest,
+                            ),
+                          )
+                          .toList(),
                     ),
-                    InterestOptionWidget(
-                      title: 'Gunung',
-                      onTap: () {},
-                    ),
-                    InterestOptionWidget(
-                      title: 'Perkotaan',
-                      onTap: () {},
-                    ),
-                    InterestOptionWidget(
-                      title: 'Danau',
-                      isActive: true,
-                      onTap: () {},
-                    ),
-                    InterestOptionWidget(
-                      title: 'Sungai',
-                      onTap: () {},
-                    ),
-                    InterestOptionWidget(
-                      title: 'Taman Hiburan',
-                      onTap: () {},
-                    ),
-                    InterestOptionWidget(
-                      title: 'Museum',
-                      isActive: true,
-                      onTap: () {},
-                    ),
-                  ],
+                  ),
                 ),
               ),
+            );
+          }
+          return const SizedBox();
+        }),
+        Obx(() {
+          return Align(
+            alignment: Alignment.bottomCenter,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                (onboardingController.selectedInterests.isEmpty)
+                    ? CustomButton.inactive(
+                        text: 'Continue',
+                      )
+                    : (!onboardingController.isSubmitLoading.value)
+                        ? CustomButton.info(
+                            text: 'Continue',
+                            onTap: () async {
+                              final isSuccess = await onboardingController
+                                  .updateInterestToNetwork();
+                              if (isSuccess) {
+                                Get.find<AuthenticationManager>()
+                                    .getMyDetailFromNetworkAndSaveToLocal();
+                                widget.onContinueCallback();
+                              } else {
+                                Get.snackbar('Error', 'Terjadi kesalahan');
+                              }
+                            },
+                          )
+                        : CustomButton.inactive(
+                            text: '',
+                            child: const CircularProgressIndicator(),
+                          ),
+                SizedBox(height: 100.w),
+              ],
             ),
-          ),
-        ),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              (ableToContinue)
-                  ? CustomButton.info(
-                      text: 'Continue',
-                      onTap: onContinueCallback,
-                    )
-                  : CustomButton.inactive(
-                      text: 'Continue',
-                    ),
-              SizedBox(height: 100.w),
-            ],
-          ),
-        ),
+          );
+        }),
       ],
     );
   }
