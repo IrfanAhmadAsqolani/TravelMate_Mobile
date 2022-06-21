@@ -50,7 +50,7 @@ class AuthenticationManager extends GetxController with CacheManager {
           );
       if (res.data != null) {
         final response = res.data as Map<String, dynamic>;
-        saveTokenAndGetDetailFromNetworkAndSaveToLocal(response['token']);
+        await saveTokenAndGetDetailFromNetworkAndSaveToLocal(response['token']);
         Get.offNamedUntil(mainPageRoute, (route) => false);
       } else {
         throw '';
@@ -73,7 +73,7 @@ class AuthenticationManager extends GetxController with CacheManager {
           );
       if (res.data != null) {
         final response = res.data as Map<String, dynamic>;
-        saveTokenAndGetDetailFromNetworkAndSaveToLocal(response['token']);
+        await saveTokenAndGetDetailFromNetworkAndSaveToLocal(response['token']);
         Get.offNamedUntil(onboardingPageRoute, (route) => false);
       } else {
         throw '';
@@ -110,6 +110,10 @@ class AuthenticationManager extends GetxController with CacheManager {
       String token) async {
     await saveToken(token);
     await getMyDetailFromNetworkAndSaveToLocal();
+  }
+
+  Future<UserMdl?> getMyUserData() async {
+    return getUserData();
   }
 
   void signOut() {
