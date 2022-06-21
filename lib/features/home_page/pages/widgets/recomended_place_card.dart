@@ -62,25 +62,24 @@ class RecommendedPlaceCard extends StatelessWidget {
                   SizedBox(height: 4.w),
                   Row(
                     children: [
-                      // TODO(adityandar): change categoryname
                       CategoryChip(
-                        title: destination.categoryId.toString(),
+                        title: destination.category?.name ?? '',
                         color: Color(0xFF7FDFFE),
                       ),
                       SizedBox(width: 6.w),
                       Text(
-                        // TODO(adityandar): change provinceName
-                        destination.provinceId.toString(),
+                        destination.province?.name ?? '',
                         style: const TextStyle(fontSize: 12),
                       ),
                     ],
                   ),
                   const Spacer(),
-                  Text(
-                    // TODO(adityandar): change invitations
-                    '0 Invitations Available',
-                    style: const TextStyle(fontSize: 12),
-                  ),
+                  if (destination.invitationsCount != null) ...[
+                    Text(
+                      '${destination.invitationsCount} Invitations Available',
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                  ],
                   SizedBox(height: 10.w),
                 ],
               ),

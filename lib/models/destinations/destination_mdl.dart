@@ -1,5 +1,6 @@
 import '../../constants/constants.dart';
 import '../../dependencies/dependencies.dart';
+import '../models.dart';
 
 class DestinationMdl extends Equatable {
   final int? id;
@@ -8,14 +9,20 @@ class DestinationMdl extends Equatable {
   final String? imgUrl;
   final String? desc;
   final int? categoryId;
+  final CategoryMdl? category;
+  final ProvinceMdl? province;
+  final int? invitationsCount;
 
   const DestinationMdl({
-    required this.id,
-    required this.provinceId,
-    required this.name,
-    required this.imgUrl,
-    required this.desc,
-    required this.categoryId,
+    this.id,
+    this.provinceId,
+    this.name,
+    this.imgUrl,
+    this.desc,
+    this.categoryId,
+    this.category,
+    this.province,
+    this.invitationsCount,
   });
 
   String get imageUrl =>
@@ -28,6 +35,9 @@ class DestinationMdl extends Equatable {
     String? imgUrl,
     String? desc,
     int? categoryId,
+    CategoryMdl? category,
+    ProvinceMdl? province,
+    int? invitationsCount,
   }) {
     return DestinationMdl(
       id: id ?? this.id,
@@ -36,6 +46,9 @@ class DestinationMdl extends Equatable {
       imgUrl: imgUrl ?? this.imgUrl,
       desc: desc ?? this.desc,
       categoryId: categoryId ?? this.categoryId,
+      category: category ?? this.category,
+      province: province ?? this.province,
+      invitationsCount: invitationsCount ?? this.invitationsCount,
     );
   }
 
@@ -47,6 +60,9 @@ class DestinationMdl extends Equatable {
       'imgUrl': imgUrl,
       'desc': desc,
       'categoryId': categoryId,
+      'category': category,
+      'province': province,
+      'invitation_count': invitationsCount,
     };
   }
 
@@ -58,6 +74,11 @@ class DestinationMdl extends Equatable {
       imgUrl: map['img_url'],
       desc: map['desc'],
       categoryId: map['category_id'],
+      category:
+          map['category'] != null ? CategoryMdl.fromMap(map['category']) : null,
+      province:
+          map['province'] != null ? ProvinceMdl.fromMap(map['province']) : null,
+      invitationsCount: map['invitations_count'],
     );
   }
 
@@ -73,6 +94,9 @@ class DestinationMdl extends Equatable {
       imgUrl,
       desc,
       categoryId,
+      category,
+      province,
+      invitationsCount,
     ];
   }
 }
