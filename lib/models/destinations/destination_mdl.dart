@@ -12,6 +12,8 @@ class DestinationMdl extends Equatable {
   final CategoryMdl? category;
   final ProvinceMdl? province;
   final int? invitationsCount;
+  final double? latitude;
+  final double? longitude;
 
   const DestinationMdl({
     this.id,
@@ -23,6 +25,8 @@ class DestinationMdl extends Equatable {
     this.category,
     this.province,
     this.invitationsCount,
+    this.latitude,
+    this.longitude,
   });
 
   String get imageUrl =>
@@ -38,6 +42,8 @@ class DestinationMdl extends Equatable {
     CategoryMdl? category,
     ProvinceMdl? province,
     int? invitationsCount,
+    double? latitude,
+    double? longitude,
   }) {
     return DestinationMdl(
       id: id ?? this.id,
@@ -49,6 +55,8 @@ class DestinationMdl extends Equatable {
       category: category ?? this.category,
       province: province ?? this.province,
       invitationsCount: invitationsCount ?? this.invitationsCount,
+      latitude: latitude ?? this.latitude,
+      longitude: longitude ?? this.longitude,
     );
   }
 
@@ -63,6 +71,8 @@ class DestinationMdl extends Equatable {
       'category': category,
       'province': province,
       'invitation_count': invitationsCount,
+      'latitude': latitude,
+      'longitude': longitude,
     };
   }
 
@@ -79,6 +89,8 @@ class DestinationMdl extends Equatable {
       province:
           map['province'] != null ? ProvinceMdl.fromMap(map['province']) : null,
       invitationsCount: map['invitations_count'],
+      latitude: map['latitude'],
+      longitude: map['longitude'],
     );
   }
 
@@ -97,6 +109,8 @@ class DestinationMdl extends Equatable {
       category,
       province,
       invitationsCount,
+      latitude,
+      longitude,
     ];
   }
 }
