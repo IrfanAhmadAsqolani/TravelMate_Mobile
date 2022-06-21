@@ -1,6 +1,7 @@
 import '../../constants/constants.dart';
 import '../../dependencies/dependencies.dart';
 import '../../enums/enums.dart';
+import '../../helpers/helpers.dart';
 
 class UserMdl extends Equatable {
   final int? id;
@@ -75,16 +76,16 @@ class UserMdl extends Equatable {
       'id': id,
       'username': username,
       'fullname': fullName,
-      'identityNumber': identityNumber,
+      'identity_number': identityNumber,
       'pending': pending,
       'verificationStatus': verificationStatus?.name,
-      'contactNumber': contactNumber,
-      'pictUrl': pictUrl,
-      'rememberMe': rememberMe,
-      'createdAt': createdAt,
-      'updatedAt': updatedAt,
-      'identityPictUrl': identityPictUrl,
-      'interests': interests,
+      'contact_number': contactNumber,
+      'pict_url': pictUrl,
+      'remember_me': rememberMe,
+      'created_at': DateHelper.getReadableDate(createdAt),
+      'updated_at': DateHelper.getReadableDate(updatedAt),
+      'identity_pict_url': identityPictUrl,
+      'interests': interests?.join(','),
     };
   }
 
