@@ -94,14 +94,7 @@ class _InvitationDetailPageState extends State<InvitationDetailPage> {
                 SizedBox(height: 10.w),
                 CustomButton.info(
                   text: 'Request to Join',
-                  onTap: () =>
-                      Get.find<InvitationController>().createInvitation(
-                    CreateInvitationParam(
-                      memberId: 2,
-                      invitationId: 3,
-                      message: _messageController.text,
-                    ),
-                  ),
+                  onTap: () {},
                   margin: EdgeInsets.zero,
                 ),
                 SizedBox(height: 44.w),

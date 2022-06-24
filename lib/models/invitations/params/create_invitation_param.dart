@@ -1,41 +1,51 @@
-import '../../../dependencies/dependencies.dart';
+class InvitationCreateParam {
+  final String title;
+  final String date;
+  final int person;
+  final String desc;
+  final String wa;
+  final int destinationId;
+  final int ownerId;
 
-class CreateInvitationParam extends Equatable {
-  final int memberId;
-  final int invitationId;
-  final int status;
-  final String message;
-
-  const CreateInvitationParam({
-    required this.memberId,
-    required this.invitationId,
-    required this.message,
-  }) : status = 0;
-
-  CreateInvitationParam copyWith({
-    int? memberId,
-    int? invitationId,
-    String? message,
-  }) {
-    return CreateInvitationParam(
-      memberId: memberId ?? this.memberId,
-      invitationId: invitationId ?? this.invitationId,
-      message: message ?? this.message,
-    );
-  }
+  const InvitationCreateParam({
+    required this.title,
+    required this.date,
+    required this.person,
+    required this.desc,
+    required this.wa,
+    required this.destinationId,
+    required this.ownerId,
+  });
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'member_id': memberId,
-      'invitation_id': invitationId,
-      'status': status,
-      'message': message,
+    return {
+      'title': title,
+      'depart_date': date,
+      'max_team': person,
+      'description': desc,
+      'group_link': wa,
+      'destination_id': destinationId,
+      'owner_id': ownerId,
     };
   }
 
-  @override
-  bool get stringify => true;
-
-  @override
-  List<Object> get props => [memberId, invitationId, status, message];
+  InvitationCreateParam copyWith({
+    String? title,
+    String? date,
+    int? person,
+    String? desc,
+    String? wa,
+    int? destinationId,
+    int? ownerId,
+  }) {
+    return InvitationCreateParam(
+      title: title ?? this.title,
+      date: date ?? this.date,
+      person: person ?? this.person,
+      desc: desc ?? this.desc,
+      wa: wa ?? this.wa,
+      destinationId: destinationId ?? this.destinationId,
+      ownerId: ownerId ?? this.ownerId,
+    );
+  }
 }
