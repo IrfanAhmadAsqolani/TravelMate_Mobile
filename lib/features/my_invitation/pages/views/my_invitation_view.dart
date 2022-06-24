@@ -26,7 +26,7 @@ class MyInvitationView extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             padding: EdgeInsets.zero,
             itemBuilder: (context, index) {
-              return InvitationCard(
+              return MyInvitationCard(
                 invitation: myInvitationController.myInvitations[index],
               );
             },
