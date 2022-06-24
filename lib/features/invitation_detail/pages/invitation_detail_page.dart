@@ -37,7 +37,7 @@ class _InvitationDetailPageState extends State<InvitationDetailPage> {
               children: [
                 SizedBox(height: 26.w),
                 Text(
-                  '${invitation?.destinationId}',
+                  '${invitation?.destination?.name}',
                   style: TextStyles.heading7Regular(),
                 ),
                 SizedBox(height: 8.w),

@@ -3,7 +3,7 @@ import 'package:travelmate/dependencies/dependencies.dart';
 import '../../../models/models.dart';
 import '../../../network/network.dart';
 
-class MyInvitationController extends GetxController {
+class MyInvitationController extends GetxController with CacheManager{
   var myInvitations = <InvitationMdl>[].obs;
   var isLoading = false.obs;
   
@@ -19,7 +19,8 @@ class MyInvitationController extends GetxController {
 
   Future<void> getMyInvitations() async {
     // TODO(irfanahmad): change to owner id menggunakan user id
-    var ownerId = 1;
+    final user = getUserData();
+    // var ownerId = 1;
     try {
       isLoading.value = true;
       final response = await Api().dio.get('invitations');
@@ -28,7 +29,7 @@ class MyInvitationController extends GetxController {
       );
       List<InvitationMdl> invitationTemp = [];
       for (var eachInvitation in resInvitation.allInvitations) {
-        if (eachInvitation.owner?.id == ownerId) {
+        if (eachInvitation.owner?.id == user?.id) {
           invitationTemp.add(eachInvitation);
         }
       }
