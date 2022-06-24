@@ -4,6 +4,7 @@ import 'package:travelmate/dependencies/dependencies.dart';
 import 'package:travelmate/features/invitation_detail/controllers/invitation_controller.dart';
 import 'package:travelmate/helpers/date_helper.dart';
 import 'package:travelmate/models/models.dart';
+import 'package:travelmate/models/travel_buddy/create_travel_buddy_param.dart';
 import 'package:travelmate/utils/utils.dart';
 
 const String invitationDetailPageRoute = '/invitation-detail';
@@ -18,11 +19,10 @@ class InvitationDetailPage extends StatefulWidget {
 class _InvitationDetailPageState extends State<InvitationDetailPage> {
   final invitation = Get.arguments as InvitationMdl?;
   final TextEditingController _messageController = TextEditingController();
-
+  final InvitationController _invitationController =
+      Get.put(InvitationController());
   @override
   Widget build(BuildContext context) {
-    Get.put(InvitationController());
-
     return Scaffold(
         body: SingleChildScrollView(
       child: Column(
@@ -92,10 +92,16 @@ class _InvitationDetailPageState extends State<InvitationDetailPage> {
                   ),
                 ),
                 SizedBox(height: 10.w),
-                
                 CustomButton.info(
                   text: 'Request to Join',
-                  onTap: () {},
+                  onTap: () {
+                    _invitationController.travelBuddyCreate(
+                        param: CreateTravelBuddyParam(
+                            memberId: 0,
+                            invitationId: invitation?.id ?? 0,
+                            status: 0,
+                            message: _messageController.text));
+                  },
                   margin: EdgeInsets.zero,
                 ),
                 SizedBox(height: 44.w),
