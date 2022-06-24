@@ -92,6 +92,7 @@ class _InvitationDetailPageState extends State<InvitationDetailPage> {
                   ),
                 ),
                 SizedBox(height: 10.w),
+                
                 CustomButton.info(
                   text: 'Request to Join',
                   onTap: () =>
