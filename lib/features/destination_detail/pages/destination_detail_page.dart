@@ -126,7 +126,8 @@ class DestinationDetailPage extends StatelessWidget {
                 CustomButton.info(
                   text: "Create Invitation",
                   onTap: () {
-                    Get.toNamed(invitationCreatePageRoute);
+                    Get.toNamed(invitationCreatePageRoute,
+                        arguments: destination);
                   },
                 ),
                 SizedBox(height: 20.w),

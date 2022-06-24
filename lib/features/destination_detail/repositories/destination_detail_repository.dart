@@ -4,7 +4,6 @@ import '../../../network/network.dart';
 
 abstract class DestinationDetailRepository {
   Future<GetAllInvitationsResponse> getAllInvitations();
-  Future<void> createInvitation(CreateInvitationParam param);
 }
 
 class DestinationDetailRepositoryImpl extends DestinationDetailRepository {
@@ -13,13 +12,5 @@ class DestinationDetailRepositoryImpl extends DestinationDetailRepository {
     var response = await Api().dio.get('invitations');
 
     return GetAllInvitationsResponse.fromMap(response.data);
-  }
-
-  @override
-  Future<void> createInvitation(CreateInvitationParam param) async {
-    await Api().dio.post(
-          'travel_buddies',
-          data: param.toMap(),
-        );
   }
 }
