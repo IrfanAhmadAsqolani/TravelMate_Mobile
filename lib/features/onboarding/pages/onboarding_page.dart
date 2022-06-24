@@ -50,12 +50,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
     final user = await Get.find<AuthenticationManager>().getMyUserData();
     if (newPage == 1) {
       if ((user?.identityPictUrl ?? '-') == '-') {
-        controller.jumpTo(1);
+        controller.jumpToPage(1);
       } else {
         Get.offAllNamed(mainPageRoute);
       }
     } else if (newPage == 2) {
-      controller.jumpTo(2);
+      controller.jumpToPage(2);
     }
   }
 }

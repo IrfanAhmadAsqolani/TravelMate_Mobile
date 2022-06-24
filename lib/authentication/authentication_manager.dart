@@ -94,7 +94,7 @@ class AuthenticationManager extends GetxController with CacheManager {
         final response = res.data as Map<String, dynamic>;
 
         final userData = UserMdl.fromMap(response);
-        saveUserData(userData);
+        await saveUserData(userData);
       } else {
         Get.offNamedUntil(loginPageRoute, (route) => false);
         throw '';
