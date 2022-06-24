@@ -89,8 +89,8 @@ class DestinationMdl extends Equatable {
       province:
           map['province'] != null ? ProvinceMdl.fromMap(map['province']) : null,
       invitationsCount: map['invitations_count'],
-      latitude: map['latitude'],
-      longitude: map['longitude'],
+      latitude: map['latitude'].toDouble(),
+      longitude: map['longitude'].toDouble(),
     );
   }
 
