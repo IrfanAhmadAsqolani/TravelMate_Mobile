@@ -46,25 +46,20 @@ class _MyInvitationDetailPageState extends State<MyInvitationDetailPage> {
                   ),
                   SizedBox(height: 10.w),
                   Text(
-                    DateHelper.getReadableDate(invitation?.createdAt),
+                    DateHelper.getReadableDate(invitation?.departDate),
                     style: TextStyles.heading5Regular(),
                   ),
                   SizedBox(height: 10.w),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      StatusChip(
-                          isOpen: true), // TODO(adityandar): fix after dynamic
+                      StatusChip(isOpen: invitation?.isOpen ?? false),
                       SizedBox(width: 10.w),
                       Text(
                         '${invitation?.maxTeam} persons',
                         style: TextStyles.heading5Regular(),
                       ),
                       SizedBox(width: 10.w),
-                      Text(
-                        '3 available slot', // TODO(adityandar): fix this
-                        style: TextStyles.heading7Regular(color: Colors.blue),
-                      ),
                     ],
                   ),
                   SizedBox(height: 10.w),
@@ -74,7 +69,7 @@ class _MyInvitationDetailPageState extends State<MyInvitationDetailPage> {
                   ),
                   SizedBox(height: 10.w),
                   SmallProfileCard(
-                    user: invitation?.owner,
+                    user: invitation?.owner?.copyWith(fullName: 'You'),
                     // user: UserMdl(
                     //   fullName: 'You',
                     //   pictUrl: 'https://via.placeholder.com/150',

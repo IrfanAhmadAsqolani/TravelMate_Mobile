@@ -12,6 +12,6 @@ class DateHelper {
     if (date == null) {
       return false;
     }
-    return date.difference(DateTime.now()).inDays > 0;
+    return date.difference(DateTime.now()).inDays >= 0;
   }
 }
