@@ -18,6 +18,7 @@ class InvitationCreateController extends GetxController with CacheManager {
             'invitations',
             data: param.copyWith(ownerId: user?.id).toMap(),
           );
+      Get.back();
     } on DioError catch (e) {
       print(e);
       Get.snackbar('Error', 'Gagal register');

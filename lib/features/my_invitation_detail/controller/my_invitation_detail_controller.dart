@@ -69,4 +69,21 @@ class MyInvitationDetailController extends GetxController with CacheManager {
       Get.snackbar('Error', 'Gagal');
     }
   }
+
+  Future<void> closeMyInvitation() async {
+    try {
+      await Api().dio.post('invitations', data: {
+        'invitation_id': invitationId,
+        'is_closed': 1,
+      }, queryParameters: {
+        '_method': 'PATCH',
+      });
+      getMyInvitationsRequest();
+    } on DioError catch (e) {
+      print(e);
+      Get.snackbar('Error', 'Gagal');
+    } catch (e) {
+      Get.snackbar('Error', 'Gagal');
+    }
+  }
 }
