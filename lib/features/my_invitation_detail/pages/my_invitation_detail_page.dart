@@ -179,19 +179,29 @@ class RequestCard extends StatelessWidget {
                 Expanded(
                   child: SmallProfileCard(user: travelBuddy.user),
                 ),
-                InkWell(
-                  child: SvgPicture.asset(
-                    Assets.icons.icApprove,
+                if (travelBuddy.status == 0) ...[
+                  InkWell(
+                    child: SvgPicture.asset(
+                      Assets.icons.icApprove,
+                    ),
+                    onTap: () {
+                      Get.find<MyInvitationDetailController>()
+                          .approveMyInvitationsRequest(travelBuddy);
+                    },
                   ),
-                  onTap: () {},
-                ),
-                SizedBox(width: 10.w),
-                InkWell(
-                  child: SvgPicture.asset(
-                    Assets.icons.icReject,
+                  SizedBox(width: 10.w),
+                  InkWell(
+                    child: SvgPicture.asset(
+                      Assets.icons.icReject,
+                    ),
+                    onTap: () {
+                      Get.find<MyInvitationDetailController>()
+                          .rejectMyInvitationsRequest(travelBuddy);
+                    },
                   ),
-                  onTap: () {},
-                ),
+                ] else ...[
+                  Text((travelBuddy.status == 1) ? 'Approved' : 'Rejected')
+                ],
               ],
             ),
           )

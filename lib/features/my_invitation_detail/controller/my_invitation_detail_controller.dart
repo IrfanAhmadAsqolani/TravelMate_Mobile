@@ -33,4 +33,40 @@ class MyInvitationDetailController extends GetxController with CacheManager {
       Get.snackbar('Error!', e.toString());
     }
   }
+
+  Future<void> approveMyInvitationsRequest(TravelBuddyMdl travelBuddy) async {
+    try {
+      await Api().dio.post('travel_buddies', data: {
+        'member_id': travelBuddy.memberId,
+        'invitation_id': travelBuddy.invitationId,
+        'status': 1,
+      }, queryParameters: {
+        '_method': 'PATCH',
+      });
+      getMyInvitationsRequest();
+    } on DioError catch (e) {
+      print(e);
+      Get.snackbar('Error', 'Gagal');
+    } catch (e) {
+      Get.snackbar('Error', 'Gagal');
+    }
+  }
+
+  Future<void> rejectMyInvitationsRequest(TravelBuddyMdl travelBuddy) async {
+    try {
+      await Api().dio.post('travel_buddies', data: {
+        'member_id': travelBuddy.memberId,
+        'invitation_id': travelBuddy.invitationId,
+        'status': 2,
+      }, queryParameters: {
+        '_method': 'PATCH',
+      });
+      getMyInvitationsRequest();
+    } on DioError catch (e) {
+      print(e);
+      Get.snackbar('Error', 'Gagal');
+    } catch (e) {
+      Get.snackbar('Error', 'Gagal');
+    }
+  }
 }
