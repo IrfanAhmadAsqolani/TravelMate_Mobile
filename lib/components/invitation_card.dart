@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:travelmate/components/components.dart';
 import 'package:travelmate/dependencies/dependencies.dart';
 import 'package:travelmate/features/invitation_detail/pages/invitation_detail_page.dart';
-import 'package:travelmate/network/network.dart';
 import 'package:travelmate/utils/utils.dart';
 
-import '../features/my_invitation_detail/pages/my_invitation_detail_page.dart';
 import '../helpers/helpers.dart';
 import '../models/models.dart';
 
-class InvitationCard extends StatelessWidget with CacheManager {
+class InvitationCard extends StatelessWidget {
   const InvitationCard({
     Key? key,
     required this.invitation,
@@ -19,13 +17,9 @@ class InvitationCard extends StatelessWidget with CacheManager {
 
   @override
   Widget build(BuildContext context) {
-    final user = getUserData();
-
     return InkWell(
       onTap: () => Get.toNamed(
-        (user?.id == invitation.id)
-            ? myInvitationDetailPageRoute
-            : invitationDetailPageRoute,
+        invitationDetailPageRoute,
         arguments: invitation,
       ),
       child: Container(

@@ -23,6 +23,7 @@ class _MyInvitationDetailPageState extends State<MyInvitationDetailPage> {
 
   @override
   void initState() {
+    print(invitation!.destination);
     myInvitationDetailController.loadData(invitation?.id ?? 0);
     super.initState();
   }
