@@ -4,8 +4,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:travelmate/dependencies/dependencies.dart';
 import 'package:travelmate/features/home_page/pages/home_page.dart';
 import 'package:travelmate/features/joined_invitation/pages/joined_invitation_page.dart';
-import 'package:travelmate/features/my_invitation/pages/my_invitation_page.dart';
 import 'package:travelmate/features/profile/pages/profile.dart';
+import 'package:travelmate/features/search/pages/search_page.dart';
 import 'package:travelmate/utils/visual/visual.dart';
 
 import '../../gen/assets.gen.dart';
@@ -30,7 +30,7 @@ class _MainPageState extends State<MainPage> {
         physics: const NeverScrollableScrollPhysics(),
         children: [
           HomePage(),
-          Container(),
+          SearchPage(),
           JoinedInvitationPage(),
           ProfilePage(),
         ],
