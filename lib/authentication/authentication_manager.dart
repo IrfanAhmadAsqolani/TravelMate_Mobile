@@ -21,6 +21,7 @@ class AuthenticationManager extends GetxController with CacheManager {
     isLogged.value = false;
     removeToken();
     removeUserData();
+    Get.offNamedUntil(loginPageRoute, (route) => false);
   }
 
   void login(String? token) async {
@@ -80,9 +81,9 @@ class AuthenticationManager extends GetxController with CacheManager {
         throw '';
       }
     } on DioError catch (e) {
-      Get.snackbar('Error', 'Gagal register');
+      Get.snackbar('Error', 'Failed to register.');
     } catch (e) {
-      Get.snackbar('Error', 'Gagal register');
+      Get.snackbar('Error', 'Failed to register.');
     }
 
     isRegisterLoading.value = false;

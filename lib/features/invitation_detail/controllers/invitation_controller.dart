@@ -1,5 +1,4 @@
 import 'package:travelmate/dependencies/dependencies.dart';
-import 'package:travelmate/models/models.dart';
 import 'package:travelmate/models/travel_buddy/create_travel_buddy_param.dart';
 
 import '../../../network/network.dart';
@@ -8,7 +7,6 @@ class InvitationController extends GetxController with CacheManager {
   final isFormLoading = false.obs;
   final isLoading = false.obs;
   final TravelBuddy = Rxn<TravelBuddyMdl>();
-  
 
   Future<void> travelBuddyCreate(
       {required CreateTravelBuddyParam param}) async {
@@ -23,9 +21,10 @@ class InvitationController extends GetxController with CacheManager {
       getTravelBuddy(param.invitationId);
     } on DioError catch (e) {
       print(e);
-      Get.snackbar('Error', 'Gagal Request, silahkan isi pesan terlebih dahulu');
+      Get.snackbar(
+          'Error', 'Failed to join invitation. Message must be filled.');
     } catch (e) {
-      Get.snackbar('Error', 'Gagal register');
+      Get.snackbar('Error', 'Failed to join invitation.');
     }
 
     isFormLoading.value = false;
@@ -39,13 +38,13 @@ class InvitationController extends GetxController with CacheManager {
         'invitation_id': invitationId,
         'member_id': user?.id,
       });
-      
+
       GetTravelBuddiesResponse resTravelBuddies =
           GetTravelBuddiesResponse.fromMap(
         response.data,
       );
       print(resTravelBuddies);
-      if (resTravelBuddies.travelBuddies.isNotEmpty){
+      if (resTravelBuddies.travelBuddies.isNotEmpty) {
         TravelBuddy.value = resTravelBuddies.travelBuddies[0];
       }
       isLoading.value = false;
@@ -53,6 +52,4 @@ class InvitationController extends GetxController with CacheManager {
       Get.snackbar('Error!', e.toString());
     }
   }
-
-
 }

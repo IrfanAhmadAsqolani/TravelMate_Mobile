@@ -1,7 +1,4 @@
 import 'package:travelmate/dependencies/dependencies.dart';
-import 'package:travelmate/features/login/pages/login_page.dart';
-import 'package:travelmate/features/main_page/main_page.dart';
-import 'package:travelmate/features/onboarding/pages/onboarding_page.dart';
 import 'package:travelmate/network/network.dart';
 
 import '../../../models/models.dart';
@@ -18,11 +15,12 @@ class InvitationCreateController extends GetxController with CacheManager {
             'invitations',
             data: param.copyWith(ownerId: user?.id).toMap(),
           );
+      Get.back();
     } on DioError catch (e) {
       print(e);
-      Get.snackbar('Error', 'Gagal register');
+      Get.snackbar('Error', 'Failed to create new invitation');
     } catch (e) {
-      Get.snackbar('Error', 'Gagal register');
+      Get.snackbar('Error', 'Failed to create new invitation');
     }
 
     isFormLoading.value = false;
