@@ -1,6 +1,3 @@
-
-
-
 import '../../dependencies/dependencies.dart';
 import '../invitations/features/features.dart';
 import '../users/user_mdl.dart';
@@ -14,6 +11,7 @@ class TravelBuddyMdl extends Equatable {
   final DateTime? updatedAt;
   final InvitationMdl? invitation;
   final UserMdl? user;
+  final String? message;
 
   const TravelBuddyMdl({
     required this.id,
@@ -24,6 +22,7 @@ class TravelBuddyMdl extends Equatable {
     required this.updatedAt,
     required this.invitation,
     required this.user,
+    required this.message,
   });
 
   TravelBuddyMdl copyWith({
@@ -35,6 +34,7 @@ class TravelBuddyMdl extends Equatable {
     DateTime? updatedAt,
     InvitationMdl? invitation,
     UserMdl? user,
+    String? message,
   }) {
     return TravelBuddyMdl(
       id: id ?? this.id,
@@ -45,6 +45,7 @@ class TravelBuddyMdl extends Equatable {
       updatedAt: updatedAt ?? this.updatedAt,
       invitation: invitation ?? this.invitation,
       user: user ?? this.user,
+      message: message ?? this.message,
     );
   }
 
@@ -58,6 +59,7 @@ class TravelBuddyMdl extends Equatable {
       'updated_at': updatedAt,
       'invitation': invitation?.toMap(),
       'user': user?.toMap(),
+      'message': message,
     };
   }
 
@@ -73,6 +75,7 @@ class TravelBuddyMdl extends Equatable {
           ? InvitationMdl.fromMap(map['invitation'])
           : null,
       user: map['user'] != null ? UserMdl.fromMap(map['user']) : null,
+      message: map['message'],
     );
   }
 
@@ -80,16 +83,17 @@ class TravelBuddyMdl extends Equatable {
   bool get stringify => true;
 
   @override
-  List<Object?> get props{ 
+  List<Object?> get props {
     return [
-      id, 
-      invitationId, 
-      memberId, 
-      status, 
-      createdAt, 
+      id,
+      invitationId,
+      memberId,
+      status,
+      createdAt,
       updatedAt,
       invitation,
       user,
+      message,
     ];
   }
 }

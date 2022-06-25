@@ -7,6 +7,7 @@ import '../../../helpers/helpers.dart';
 import '../../../models/models.dart';
 import '../../../utils/utils.dart';
 import '../../invitation_edit/pages/invitation_edit_page.dart';
+import '../controller/my_invitation_detail_controller.dart';
 
 const String myInvitationDetailPageRoute = '/my-invitation-detail';
 
@@ -19,6 +20,13 @@ class MyInvitationDetailPage extends StatefulWidget {
 
 class _MyInvitationDetailPageState extends State<MyInvitationDetailPage> {
   final invitation = Get.arguments as InvitationMdl?;
+  final myInvitationDetailController = Get.put(MyInvitationDetailController());
+
+  @override
+  void initState() {
+    myInvitationDetailController.loadData(invitation?.id ?? 0);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,10 +78,6 @@ class _MyInvitationDetailPageState extends State<MyInvitationDetailPage> {
                   SizedBox(height: 10.w),
                   SmallProfileCard(
                     user: invitation?.owner?.copyWith(fullName: 'You'),
-                    // user: UserMdl(
-                    //   fullName: 'You',
-                    //   pictUrl: 'https://via.placeholder.com/150',
-                    // ),
                   ),
                   SizedBox(height: 10.w),
                   CustomOutlinedButton.info(
@@ -85,30 +89,47 @@ class _MyInvitationDetailPageState extends State<MyInvitationDetailPage> {
                     },
                     margin: EdgeInsets.zero,
                   ),
-                  SizedBox(height: 10.w),
-                  CustomButton.info(
-                    text: 'Close Invitation',
-                    onTap: () {},
-                    margin: EdgeInsets.zero,
-                  ),
                   SizedBox(height: 44.w),
                   Text(
                     "Request List",
                     style: TextStyles.heading5SemiBold(),
                   ),
                   SizedBox(height: 10.w),
-                  RequestCard(
-                      reqMessage:
-                          "Pengen ikutttttttttt, Jikalau telah datang waktu yang dinanti Ku pasti bahagiakan dirimu seorang Kuharap dikau sabar menunggu"),
-                  SizedBox(height: 10.w),
-                  RequestCard(
-                    reqMessage: "Gamau ikut sih iseng doang",
+                  Obx(
+                    () {
+                      if (myInvitationDetailController.isLoading.value) {
+                        return ShimmerContainer(
+                          width: 1.sw,
+                          margin: EdgeInsets.symmetric(horizontal: 16.w),
+                        );
+                      }
+                      if (myInvitationDetailController
+                          .myInvitationsRequest.isNotEmpty) {
+                        return ListView.separated(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          padding: EdgeInsets.zero,
+                          itemBuilder: (context, index) {
+                            return RequestCard(
+                              travelBuddy: myInvitationDetailController
+                                  .myInvitationsRequest[index],
+                            );
+                          },
+                          separatorBuilder: (context, index) => SizedBox(
+                            height: 17.w,
+                          ),
+                          itemCount: myInvitationDetailController
+                              .myInvitationsRequest.length,
+                        );
+                      }
+                      return Center(
+                        child: Text(
+                          'There is no available request',
+                          style: TextStyles.heading5Regular(),
+                        ),
+                      );
+                    },
                   ),
-                  SizedBox(height: 10.w),
-                  RequestCard(
-                    reqMessage: "Mau ikut dong belum pernah liat pantai :(",
-                  ),
-                  SizedBox(height: 30.w),
                 ],
               ),
             ),
@@ -121,11 +142,11 @@ class _MyInvitationDetailPageState extends State<MyInvitationDetailPage> {
 
 class RequestCard extends StatelessWidget {
   const RequestCard({
-    required this.reqMessage,
+    required this.travelBuddy,
     Key? key,
   }) : super(key: key);
 
-  final String reqMessage;
+  final TravelBuddyMdl travelBuddy;
 
   @override
   Widget build(BuildContext context) {
@@ -145,7 +166,7 @@ class RequestCard extends StatelessWidget {
               vertical: 10.w,
             ),
             child: Text(
-              reqMessage,
+              travelBuddy.message ?? '',
             ),
           ),
           Padding(
@@ -156,12 +177,7 @@ class RequestCard extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: SmallProfileCard(
-                    user: UserMdl(
-                      fullName: 'Cameron Steward',
-                      pictUrl: 'https://via.placeholder.com/150',
-                    ),
-                  ),
+                  child: SmallProfileCard(user: travelBuddy.user),
                 ),
                 InkWell(
                   child: SvgPicture.asset(
