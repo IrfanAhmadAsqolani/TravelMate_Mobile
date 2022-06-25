@@ -28,10 +28,11 @@ class AuthenticationManager extends GetxController with CacheManager {
     await saveToken(token);
   }
 
-  void checkLoginStatus() {
+  Future<void> checkLoginStatus() async {
     final token = getToken();
-    Future.delayed(const Duration(milliseconds: 500)).then((_) {
+    Future.delayed(const Duration(milliseconds: 500)).then((_) async {
       if (token != null) {
+        await getMyDetailFromNetworkAndSaveToLocal();
         Get.offNamedUntil(mainPageRoute, (route) => false);
       } else {
         Get.offNamedUntil(loginPageRoute, (route) => false);

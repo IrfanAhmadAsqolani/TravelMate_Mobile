@@ -54,7 +54,7 @@ class _InvitationDetailPageState extends State<InvitationDetailPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const StatusChip(isOpen: true),
+                    StatusChip(isOpen: invitation?.isOpen ?? false),
                     SizedBox(width: 8.w),
                     Text(
                       '${invitation?.maxTeam} persons',

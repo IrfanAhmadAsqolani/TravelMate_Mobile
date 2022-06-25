@@ -44,20 +44,16 @@ class _OnboardingUploadKTPViewState extends State<OnboardingUploadKTPView> {
                   ],
                 ),
               ),
-              Center(
-                child: Image.file(
-                  File(filePickerController.imageFile.value.path),
-                  width: 300.w,
-                  height: 254.w,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              // Center(
-              //   child: Image.asset(
-              //     Assets.images.imgKtpNotFound.path,
-              //     width: 254.w,
-              //   ),
-              // ),
+              Obx(() {
+                return Center(
+                  child: Image.file(
+                    File(filePickerController.imageFile.value.path),
+                    width: 300.w,
+                    height: 254.w,
+                    fit: BoxFit.cover,
+                  ),
+                );
+              }),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Column(
@@ -70,7 +66,8 @@ class _OnboardingUploadKTPViewState extends State<OnboardingUploadKTPView> {
                     SizedBox(height: 15.w),
                     CustomOutlinedButton.info(
                       text: 'Retake',
-                      onTap: () {},
+                      onTap: () async => await filePickerController
+                          .selectImageAndUploadAsIdentity(false),
                     ),
                     SizedBox(height: 30.w),
                   ],
@@ -112,11 +109,8 @@ class _OnboardingUploadKTPViewState extends State<OnboardingUploadKTPView> {
             SizedBox(height: 70.w),
             CustomButton.info(
               text: 'Upload ID Card',
-              onTap: () async {
-                await filePickerController
-                    .selectImageAndUploadAsIdentity(false);
-                setState(() {});
-              },
+              onTap: () async => await filePickerController
+                  .selectImageAndUploadAsIdentity(false),
             )
           ],
         ),

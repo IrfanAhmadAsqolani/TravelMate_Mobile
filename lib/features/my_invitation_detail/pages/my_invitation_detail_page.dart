@@ -45,7 +45,8 @@ class MyInvitationDetailPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      StatusChip(isOpen: true),
+                      StatusChip(
+                          isOpen: true), // TODO(adityandar): fix after dynamic
                       SizedBox(width: 10.w),
                       Text(
                         '10 persons',

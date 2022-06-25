@@ -38,14 +38,14 @@ class UserMdl extends Equatable {
     if (pictUrl == '-') {
       return '';
     }
-    return '${CommonConstant.networkImageBaseUrl}users/$pictUrl';
+    return '${CommonConstant.networkImageUrl}$pictUrl';
   }
 
   String get identityPictImageUrl {
     if (pictUrl == '-') {
       return '';
     }
-    return '${CommonConstant.networkImageBaseUrl}users/$identityPictUrl';
+    return '${CommonConstant.networkImageUrl}$identityPictUrl';
   }
 
   bool get isInterestEmpty =>
@@ -90,7 +90,7 @@ class UserMdl extends Equatable {
       'fullname': fullName,
       'identity_number': identityNumber,
       'pending': pending,
-      'verificationStatus': verificationStatus?.name,
+      'status': verificationStatus?.name,
       'contact_number': contactNumber,
       'pict_url': pictUrl,
       'remember_me': rememberMe,
