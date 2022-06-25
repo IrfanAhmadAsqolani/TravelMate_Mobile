@@ -21,6 +21,15 @@ class _InvitationDetailPageState extends State<InvitationDetailPage> {
   final TextEditingController _messageController = TextEditingController();
   final InvitationController _invitationController =
       Get.put(InvitationController());
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _invitationController.getTravelBuddy(invitation?.id ?? 0);
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,34 +82,61 @@ class _InvitationDetailPageState extends State<InvitationDetailPage> {
                   user: invitation?.owner,
                 ),
                 SizedBox(height: 10.w),
-                Container(
-                  decoration: BoxDecoration(
-                    boxShadow: Shadows.defaultShadow(),
-                  ),
-                  child: TextFormField(
-                    controller: _messageController,
-                    decoration: CustomInputDecoration.formDecoration(
-                      'Add Message',
-                    ),
-                    maxLines: null,
-                    minLines: 2,
-                    maxLength: 100,
-                  ),
-                ),
-                SizedBox(height: 10.w),
-                CustomButton.info(
-                  text: 'Request to Join',
-                  onTap: () {
-                    _invitationController.travelBuddyCreate(
-                        param: CreateTravelBuddyParam(
-                            memberId: 0,
-                            invitationId: invitation?.id ?? 0,
-                            status: 0,
-                            message: _messageController.text));
-                  },
-                  margin: EdgeInsets.zero,
-                ),
-                SizedBox(height: 44.w),
+                Obx((() {
+                  if (_invitationController.TravelBuddy != TravelBuddyMdl()) {
+                    return Column(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            boxShadow: Shadows.defaultShadow(),
+                          ),
+                          child: TextFormField(
+                            controller: _messageController,
+                            decoration: CustomInputDecoration.formDecoration(
+                              'Add Message',
+                            ),
+                            maxLines: null,
+                            minLines: 2,
+                            maxLength: 100,
+                          ),
+                        ),
+                        SizedBox(height: 10.w),
+                        CustomButton.info(
+                          text: 'Request to Join',
+                          onTap: () {
+                            _invitationController.travelBuddyCreate(
+                                param: CreateTravelBuddyParam(
+                                    memberId: 0,
+                                    invitationId: invitation?.id ?? 0,
+                                    status: 0,
+                                    message: _messageController.text));
+                          },
+                          margin: EdgeInsets.zero,
+                        ),
+                      ],
+                    );
+                  } else {
+                    if (_invitationController.TravelBuddy.value.status == 0) {
+                      return CustomButton.inactive(
+                        text: 'Requested',
+                        margin: EdgeInsets.zero,
+                      );
+                    } else if (_invitationController.TravelBuddy.value.status == 1){
+                      return CustomButton.success(
+                        text: 'Join Grup ',
+                        onTap: () {},
+                        margin: EdgeInsets.zero,
+                      );
+                    } else if (_invitationController.TravelBuddy.value.status == 2) {
+                      return CustomButton.danger(
+                        text: 'Not Available',
+                        onTap: () {},
+                        margin: EdgeInsets.zero,
+                      );
+                    }
+                  }
+                  return SizedBox(height: 44.w);
+                })),
                 Text(
                   'You might interest in',
                   style: TextStyles.heading5SemiBold(),
