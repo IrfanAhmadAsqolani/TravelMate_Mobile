@@ -15,6 +15,7 @@ class InvitationMdl extends Equatable {
   final DateTime? departDate;
   final UserMdl? owner;
   final DestinationMdl? destination;
+  final int? approvedBuddies;
 
   const InvitationMdl({
     this.id,
@@ -29,9 +30,21 @@ class InvitationMdl extends Equatable {
     this.departDate,
     this.owner,
     this.destination,
+    this.approvedBuddies,
   });
 
-  bool get isOpen => DateHelper.isBeforeToday(departDate);
+  bool get isOpen => DateHelper.isBeforeToday(departDate) && isSlotAvailable;
+
+  bool get isSlotAvailable => (approvedBuddies ?? 0) < (maxTeam ?? 0);
+
+  int? get slotAvailable {
+    if (maxTeam != null && approvedBuddies != null) {
+      if (approvedBuddies! < maxTeam!) {
+        return maxTeam! - approvedBuddies!;
+      }
+    }
+    return null;
+  }
 
   InvitationMdl copyWith({
     int? id,
@@ -46,6 +59,7 @@ class InvitationMdl extends Equatable {
     DateTime? departDate,
     UserMdl? owner,
     DestinationMdl? destination,
+    int? approvedBuddies,
   }) {
     return InvitationMdl(
       id: id ?? this.id,
@@ -60,6 +74,7 @@ class InvitationMdl extends Equatable {
       owner: owner ?? this.owner,
       destination: destination ?? this.destination,
       departDate: departDate ?? this.departDate,
+      approvedBuddies: approvedBuddies ?? this.approvedBuddies,
     );
   }
 
@@ -77,6 +92,7 @@ class InvitationMdl extends Equatable {
       'departDate': departDate,
       'owner': owner?.toMap(),
       'destination': destination?.toMap(),
+      'approved_buddies': approvedBuddies,
     };
   }
 
@@ -96,6 +112,7 @@ class InvitationMdl extends Equatable {
       destination: (map['destination'] != null)
           ? DestinationMdl.fromMap(map['destination'])
           : null,
+      approvedBuddies: map['approved_buddies'],
     );
   }
 
@@ -116,6 +133,7 @@ class InvitationMdl extends Equatable {
       departDate,
       owner,
       destination,
+      approvedBuddies,
     ];
   }
 }

@@ -1,6 +1,7 @@
 import 'package:travelmate/dependencies/dependencies.dart';
 import 'package:travelmate/models/travel_buddy/create_travel_buddy_param.dart';
 
+import '../../../models/models.dart';
 import '../../../network/network.dart';
 
 class InvitationController extends GetxController with CacheManager {

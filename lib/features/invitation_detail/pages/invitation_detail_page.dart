@@ -33,6 +33,7 @@ class _InvitationDetailPageState extends State<InvitationDetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    print(invitation?.approvedBuddies);
     return Scaffold(
         body: SingleChildScrollView(
       child: Column(
@@ -71,6 +72,12 @@ class _InvitationDetailPageState extends State<InvitationDetailPage> {
                       style: TextStyles.heading5Regular(),
                     ),
                     SizedBox(width: 8.w),
+                    if (invitation?.slotAvailable != null) ...[
+                      Text(
+                        '${invitation?.slotAvailable} available slot',
+                        style: TextStyles.heading7Regular(color: Colors.blue),
+                      ),
+                    ],
                   ],
                 ),
                 SizedBox(height: 8.w),
@@ -160,7 +167,8 @@ class _InvitationDetailPageState extends State<InvitationDetailPage> {
                         return CustomButton.danger(
                           text: 'Not Available',
                           onTap: () {
-                            Get.snackbar('Invitation Closed', "This invitation has been closed");
+                            Get.snackbar('Invitation Closed',
+                                "This invitation has been closed");
                           },
                           margin: EdgeInsets.zero,
                         );
@@ -172,7 +180,8 @@ class _InvitationDetailPageState extends State<InvitationDetailPage> {
                   CustomButton.danger(
                     text: 'Not Available',
                     onTap: () {
-                      Get.snackbar('Invitation Closed', "This invitation has been closed");
+                      Get.snackbar('Invitation Closed',
+                          "This invitation has been closed");
                     },
                     margin: EdgeInsets.zero,
                   ),
