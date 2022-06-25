@@ -5,6 +5,8 @@ import '../../../network/network.dart';
 
 class InvitationController extends GetxController with CacheManager {
   final isFormLoading = false.obs;
+  final isLoading = false.obs;
+  final TravelBuddy = Rxn<TravelBuddyMdl>();
 
   Future<void> travelBuddyCreate(
       {required CreateTravelBuddyParam param}) async {
@@ -16,14 +18,38 @@ class InvitationController extends GetxController with CacheManager {
             'travel_buddies',
             data: param.copyWith(memberId: user?.id).toMap(),
           );
-      // Get.back();
+      getTravelBuddy(param.invitationId);
     } on DioError catch (e) {
       print(e);
-      Get.snackbar('Error', 'Failed to join invitation.');
+      Get.snackbar(
+          'Error', 'Failed to join invitation. Message must be filled.');
     } catch (e) {
       Get.snackbar('Error', 'Failed to join invitation.');
     }
 
     isFormLoading.value = false;
+  }
+
+  Future<void> getTravelBuddy(int invitationId) async {
+    final user = getUserData();
+    try {
+      isLoading.value = true;
+      final response = await Api().dio.get('travel_buddies', queryParameters: {
+        'invitation_id': invitationId,
+        'member_id': user?.id,
+      });
+
+      GetTravelBuddiesResponse resTravelBuddies =
+          GetTravelBuddiesResponse.fromMap(
+        response.data,
+      );
+      print(resTravelBuddies);
+      if (resTravelBuddies.travelBuddies.isNotEmpty) {
+        TravelBuddy.value = resTravelBuddies.travelBuddies[0];
+      }
+      isLoading.value = false;
+    } on DioError catch (e) {
+      Get.snackbar('Error!', e.toString());
+    }
   }
 }

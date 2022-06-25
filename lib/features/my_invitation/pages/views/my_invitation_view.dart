@@ -38,7 +38,7 @@ class MyInvitationView extends StatelessWidget {
         }
         return Center(
           child: Text(
-            'There is no available invitation',
+            'You never made an invitation',
             style: TextStyles.heading5Regular(),
           ),
         );
