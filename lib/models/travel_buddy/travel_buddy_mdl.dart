@@ -14,15 +14,15 @@ class TravelBuddyMdl extends Equatable {
   final String? message;
 
   const TravelBuddyMdl({
-    required this.id,
-    required this.invitationId,
-    required this.memberId,
-    required this.status,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.invitation,
-    required this.user,
-    required this.message,
+     this.id,
+     this.invitationId,
+     this.memberId,
+     this.status,
+     this.createdAt,
+     this.updatedAt,
+     this.invitation,
+     this.user,
+     this.message,
   });
 
   TravelBuddyMdl copyWith({
