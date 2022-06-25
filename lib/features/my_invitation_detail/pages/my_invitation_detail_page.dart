@@ -79,16 +79,6 @@ class _MyInvitationDetailPageState extends State<MyInvitationDetailPage> {
                   SmallProfileCard(
                     user: invitation?.owner?.copyWith(fullName: 'You'),
                   ),
-                  SizedBox(height: 10.w),
-                  CustomOutlinedButton.info(
-                    text: 'Edit',
-                    onTap: () {
-                      Get.toNamed(
-                        invitationEditPageRoute,
-                      );
-                    },
-                    margin: EdgeInsets.zero,
-                  ),
                   SizedBox(height: 44.w),
                   Text(
                     "Request List",

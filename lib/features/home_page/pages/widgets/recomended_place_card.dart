@@ -64,7 +64,7 @@ class RecommendedPlaceCard extends StatelessWidget {
                     children: [
                       CategoryChip(
                         title: destination.category?.name ?? '',
-                        color: Color(0xFF7FDFFE),
+                        color: CustomColors.grey.withOpacity(0.6),
                       ),
                       SizedBox(width: 6.w),
                       Text(

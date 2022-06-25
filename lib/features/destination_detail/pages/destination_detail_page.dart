@@ -85,7 +85,7 @@ class DestinationDetailPage extends StatelessWidget {
                       children: [
                         CategoryChip(
                           title: destination.category?.name ?? '',
-                          color: Color(0xFF7FDFFE),
+                          color: CustomColors.grey.withOpacity(0.6),
                         ),
                         SizedBox(width: 12.w),
                         Text(
@@ -125,9 +125,10 @@ class DestinationDetailPage extends StatelessWidget {
               children: [
                 CustomButton.info(
                   text: "Create Invitation",
-                  onTap: () {
-                    Get.toNamed(invitationCreatePageRoute,
+                  onTap: () async {
+                    await Get.toNamed(invitationCreatePageRoute,
                         arguments: destination);
+                    destinationController.loadData();
                   },
                 ),
                 SizedBox(height: 20.w),
