@@ -6,7 +6,6 @@ import '../../../gen/assets.gen.dart';
 import '../../../helpers/helpers.dart';
 import '../../../models/models.dart';
 import '../../../utils/utils.dart';
-import '../../invitation_edit/pages/invitation_edit_page.dart';
 import '../controller/my_invitation_detail_controller.dart';
 
 const String myInvitationDetailPageRoute = '/my-invitation-detail';
@@ -68,6 +67,12 @@ class _MyInvitationDetailPageState extends State<MyInvitationDetailPage> {
                         style: TextStyles.heading5Regular(),
                       ),
                       SizedBox(width: 10.w),
+                      if (invitation?.slotAvailable != null) ...[
+                        Text(
+                          '${invitation?.slotAvailable} available slot',
+                          style: TextStyles.heading7Regular(color: Colors.blue),
+                        ),
+                      ],
                     ],
                   ),
                   SizedBox(height: 10.w),
