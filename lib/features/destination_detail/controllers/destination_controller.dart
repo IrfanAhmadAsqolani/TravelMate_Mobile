@@ -1,14 +1,19 @@
 import 'package:travelmate/features/destination_detail/repositories/repositories.dart';
+import 'package:travelmate/network/network.dart';
 
 import '../../../dependencies/dependencies.dart';
+import '../../../enums/enums.dart';
 import '../../../models/models.dart';
 
-class DestinationController extends GetxController {
+class DestinationController extends GetxController with CacheManager {
   DestinationController({this.destinationId});
 
   final int? destinationId;
   var invitations = <InvitationMdl>[].obs;
   var isLoading = false.obs;
+
+  bool get isUserVerified =>
+      getUserData()?.verificationStatus == VerificationStatus.verified;
 
   @override
   void onInit() async {

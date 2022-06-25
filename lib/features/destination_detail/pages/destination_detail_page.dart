@@ -118,23 +118,28 @@ class DestinationDetailPage extends StatelessWidget {
               ),
             ),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                CustomButton.info(
-                  text: "Create Invitation",
-                  onTap: () async {
-                    await Get.toNamed(invitationCreatePageRoute,
-                        arguments: destination);
-                    destinationController.loadData();
-                  },
+          Obx(() {
+            if (destinationController.isUserVerified) {
+              return Align(
+                alignment: Alignment.bottomCenter,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    CustomButton.info(
+                      text: "Create Invitation",
+                      onTap: () async {
+                        await Get.toNamed(invitationCreatePageRoute,
+                            arguments: destination);
+                        destinationController.loadData();
+                      },
+                    ),
+                    SizedBox(height: 20.w),
+                  ],
                 ),
-                SizedBox(height: 20.w),
-              ],
-            ),
-          )
+              );
+            }
+            return const SizedBox();
+          })
         ],
       ),
     );
