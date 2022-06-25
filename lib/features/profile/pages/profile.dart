@@ -59,7 +59,20 @@ class _ProfilePageState extends State<ProfilePage> with CacheManager {
                   ),
                   Divider(color: CustomColors.grey, thickness: 1.w),
                   InkWell(
-                    onTap: () => launchUrl(uri),
+                    onTap: () async {
+                      final url = Uri.tryParse(
+                        'whatsapp://send?phone=6285155427717',
+                      );
+                      if (url != null) {
+                        if (await canLaunchUrl(url)) {
+                          await launchUrl(
+                            url,
+                          );
+                        } else {
+                          Get.snackbar('Error', 'Can not launch url');
+                        }
+                      }
+                    },
                     child: Padding(
                       padding: EdgeInsets.symmetric(vertical: 10.w),
                       child: Text(
