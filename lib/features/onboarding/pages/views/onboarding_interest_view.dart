@@ -90,7 +90,7 @@ class _OnboardingInterestViewState extends State<OnboardingInterestView> {
                               final isSuccess = await onboardingController
                                   .updateInterestToNetwork();
                               if (isSuccess) {
-                                Get.find<AuthenticationManager>()
+                                await Get.find<AuthenticationManager>()
                                     .getMyDetailFromNetworkAndSaveToLocal();
                                 widget.onContinueCallback();
                               } else {

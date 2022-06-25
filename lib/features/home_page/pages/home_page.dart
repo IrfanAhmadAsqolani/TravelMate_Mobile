@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:travelmate/dependencies/dependencies.dart';
 import 'package:travelmate/features/home_page/controllers/home_controller.dart';
 
+import '../../../components/components.dart';
 import 'views/views.dart';
 
 const String homePageRoute = '/home-page'; //
@@ -22,6 +23,11 @@ class HomePage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Obx(() {
+                  return VerificationStatusInfo(
+                    status: Get.find<HomeController>().verificationStatus.value,
+                  );
+                }),
                 SizedBox(height: 31.w),
                 Padding(
                   padding: EdgeInsets.only(left: 26.w),

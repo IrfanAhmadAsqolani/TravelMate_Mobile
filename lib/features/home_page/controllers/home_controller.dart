@@ -1,4 +1,6 @@
 import 'package:travelmate/dependencies/dependencies.dart';
+import 'package:travelmate/enums/verification_status.dart';
+import 'package:travelmate/helpers/auth_helper.dart';
 
 import '../../../models/models.dart';
 import '../../../network/network.dart';
@@ -6,6 +8,7 @@ import '../../../network/network.dart';
 class HomeController extends GetxController with CacheManager {
   var popularDestinations = <DestinationMdl>[].obs;
   var recommendedDestinations = <DestinationMdl>[].obs;
+  var verificationStatus = VerificationStatus.verified.obs;
   var isLoading = false.obs;
   final isInterestsEmpty = false.obs;
 
@@ -18,6 +21,7 @@ class HomeController extends GetxController with CacheManager {
   void loadData() {
     getPopularDestinations();
     getRecommendedDestinations();
+    getUserVerifiedStatus();
   }
 
   Future<void> getPopularDestinations() async {
@@ -62,5 +66,12 @@ class HomeController extends GetxController with CacheManager {
         Get.snackbar('Error!', e.toString());
       }
     }
+  }
+
+  Future<void> getUserVerifiedStatus() async {
+    await AuthHelper().getMyUserDataAndSaveToLocal();
+    final user = getUserData();
+    verificationStatus.value =
+        user?.verificationStatus ?? VerificationStatus.pending;
   }
 }
