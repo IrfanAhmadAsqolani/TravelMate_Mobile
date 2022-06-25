@@ -10,6 +10,7 @@ class MyInvitationDetailController extends GetxController with CacheManager {
 
   @override
   void onInit() {
+    print("B");
     super.onInit();
   }
 
