@@ -15,6 +15,9 @@ class ValidationHelper {
     if (int.tryParse(val ?? '') == null) {
       return 'Data must be number';
     }
+    if (val!.length > 16) {
+      return 'Data must be shorter than 20.';
+    }
     return null;
   }
 }

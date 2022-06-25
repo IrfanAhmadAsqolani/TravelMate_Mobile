@@ -1,4 +1,5 @@
 import 'package:travelmate/dependencies/dependencies.dart';
+import 'package:travelmate/enums/enums.dart';
 import 'package:travelmate/models/travel_buddy/create_travel_buddy_param.dart';
 
 import '../../../models/models.dart';
@@ -10,6 +11,9 @@ class InvitationController extends GetxController with CacheManager {
   final TravelBuddy = Rxn<TravelBuddyMdl>();
 
   int get userId => getUserData()?.id ?? 0;
+
+  bool get isUserVerified =>
+      getUserData()?.verificationStatus == VerificationStatus.verified;
 
   Future<void> travelBuddyCreate(
       {required CreateTravelBuddyParam param}) async {

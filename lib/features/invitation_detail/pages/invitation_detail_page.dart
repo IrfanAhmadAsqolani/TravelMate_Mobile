@@ -90,6 +90,12 @@ class _InvitationDetailPageState extends State<InvitationDetailPage> {
                 SizedBox(height: 10.w),
                 if (invitation?.isOpen ?? false) ...[
                   Obx((() {
+                    if (!_invitationController.isUserVerified) {
+                      return CustomButton.inactive(
+                        text: 'Request to Join',
+                        margin: EdgeInsets.zero,
+                      );
+                    }
                     if (_invitationController.userId == invitation?.ownerId) {
                       return CustomButton.danger(
                         text: 'Not Available',
