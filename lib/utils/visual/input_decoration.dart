@@ -50,4 +50,18 @@ class CustomInputDecoration {
       ),
     );
   }
+
+  static InputDecoration passwordInputDecoration({
+    required VoidCallback onTap,
+    required bool isObscure,
+  }) {
+    return CustomInputDecoration.defaultDecoration('Password').copyWith(
+      suffixIcon: IconButton(
+        onPressed: onTap,
+        icon: Icon(
+          (isObscure) ? Icons.visibility : Icons.visibility_off,
+        ),
+      ),
+    );
+  }
 }

@@ -27,6 +27,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   final authManager = Get.find<AuthenticationManager>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  var isObscure = true;
 
   @override
   Widget build(BuildContext context) {
@@ -82,8 +83,15 @@ class _RegisterPageState extends State<RegisterPage> {
               SizedBox(height: 6.w),
               TextFormField(
                 controller: _passwordController,
-                decoration: CustomInputDecoration.defaultDecoration('Password'),
-                obscureText: true,
+                decoration: CustomInputDecoration.passwordInputDecoration(
+                  onTap: () {
+                    setState(() {
+                      isObscure = !isObscure;
+                    });
+                  },
+                  isObscure: isObscure,
+                ),
+                obscureText: isObscure,
                 validator: ValidationHelper.emptyFormValidation,
               ),
               SizedBox(height: 100.w),

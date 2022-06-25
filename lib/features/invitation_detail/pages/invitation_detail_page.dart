@@ -47,7 +47,7 @@ class _InvitationDetailPageState extends State<InvitationDetailPage> {
                 ),
                 SizedBox(height: 8.w),
                 Text(
-                  DateHelper.getReadableDate(invitation?.createdAt),
+                  DateHelper.getReadableDate(invitation?.departDate),
                   style: TextStyles.heading5Regular(),
                 ),
                 SizedBox(height: 8.w),
@@ -61,10 +61,6 @@ class _InvitationDetailPageState extends State<InvitationDetailPage> {
                       style: TextStyles.heading5Regular(),
                     ),
                     SizedBox(width: 8.w),
-                    Text(
-                      '1 available slot', // TODO(adityandar): fix this
-                      style: TextStyles.heading7Regular(color: Colors.blue),
-                    ),
                   ],
                 ),
                 SizedBox(height: 8.w),

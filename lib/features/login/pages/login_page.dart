@@ -9,12 +9,20 @@ import '../../../models/models.dart';
 
 const String loginPageRoute = '/login-page';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final TextEditingController _usernameController = TextEditingController();
+
   final TextEditingController _passwordController = TextEditingController();
 
   final authManager = Get.find<AuthenticationManager>();
+  bool isObscure = true;
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +52,15 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: 6.w),
             TextFormField(
               controller: _passwordController,
-              obscureText: true,
-              decoration: CustomInputDecoration.defaultDecoration('Password'),
+              obscureText: isObscure,
+              decoration: CustomInputDecoration.passwordInputDecoration(
+                onTap: () {
+                  setState(() {
+                    isObscure = !isObscure;
+                  });
+                },
+                isObscure: isObscure,
+              ),
             ),
             SizedBox(height: 238.w),
             Obx(
