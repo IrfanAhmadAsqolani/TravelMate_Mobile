@@ -9,6 +9,8 @@ class InvitationController extends GetxController with CacheManager {
   final isLoading = false.obs;
   final TravelBuddy = Rxn<TravelBuddyMdl>();
 
+  int get userId => getUserData()?.id ?? 0;
+
   Future<void> travelBuddyCreate(
       {required CreateTravelBuddyParam param}) async {
     isFormLoading.value = true;

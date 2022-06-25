@@ -26,14 +26,12 @@ class _InvitationDetailPageState extends State<InvitationDetailPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _invitationController.getTravelBuddy(invitation?.id ?? 0);
   }
 
   @override
   Widget build(BuildContext context) {
-    print(invitation?.approvedBuddies);
     return Scaffold(
         body: SingleChildScrollView(
       child: Column(
@@ -92,6 +90,18 @@ class _InvitationDetailPageState extends State<InvitationDetailPage> {
                 SizedBox(height: 10.w),
                 if (invitation?.isOpen ?? false) ...[
                   Obx((() {
+                    if (_invitationController.userId == invitation?.ownerId) {
+                      return CustomButton.danger(
+                        text: 'Not Available',
+                        onTap: () {
+                          Get.snackbar(
+                            'Error',
+                            'You can not join to your own invitation.',
+                          );
+                        },
+                        margin: EdgeInsets.zero,
+                      );
+                    }
                     if (_invitationController.TravelBuddy.value == null) {
                       return Column(
                         children: [
