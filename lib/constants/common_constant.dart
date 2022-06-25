@@ -5,5 +5,5 @@ class CommonConstant {
       'http://travelmate.masuk.id/storage/app/public/';
 
   static const String networkImageUrl =
-      'http://travelmate.masuk.id/storage/public/images/';
+      'http://travelmate.masuk.id/public/images/';
 }
