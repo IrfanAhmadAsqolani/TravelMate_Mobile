@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:travelmate/authentication/authentication_manager.dart';
 import 'package:travelmate/dependencies/dependencies.dart';
-import 'package:travelmate/features/login/pages/login_page.dart';
+import 'package:travelmate/features/profile/pages/controllers/profile_controller.dart';
+import 'package:travelmate/network/network.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../components/components.dart';
-import '../../../models/models.dart';
 import '../../../utils/utils.dart';
 import '../../my_invitation/pages/my_invitation_page.dart';
 
@@ -19,8 +18,9 @@ class ProfilePage extends StatefulWidget {
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _ProfilePageState extends State<ProfilePage> with CacheManager {
   final Uri uri = Uri.parse('https://wa.me/6285155427717');
+  final controller = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -32,15 +32,17 @@ class _ProfilePageState extends State<ProfilePage> {
             children: [
               SizedBox(height: 35.w),
               SizedBox(height: 35.w),
-              Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 35.w),
-                  child: BigProfileCard(
-                    user: UserMdl(
-                      fullName: 'baguS seno',
-                      pictUrl:
-                          'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHw%3D&w=1000&q=80',
-                    ),
-                  )),
+              GestureDetector(
+                onTap: () {
+                  controller.selectImageAndUploadAsProfile(false);
+                  setState(() {});
+                },
+                child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 35.w),
+                    child: BigProfileCard(
+                      user: getUserData(),
+                    )),
+              ),
               SizedBox(height: 40.w),
               Column(
                 children: [
@@ -53,14 +55,6 @@ class _ProfilePageState extends State<ProfilePage> {
                         'My Invitation',
                         style: TextStyles.heading5Regular(),
                       ),
-                    ),
-                  ),
-                  Divider(color: CustomColors.grey, thickness: 1.w),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10.w),
-                    child: Text(
-                      'Account Settings',
-                      style: TextStyles.heading5Regular(),
                     ),
                   ),
                   Divider(color: CustomColors.grey, thickness: 1.w),
@@ -87,7 +81,9 @@ class _ProfilePageState extends State<ProfilePage> {
                             child: const Text('Cancel'),
                           ),
                           TextButton(
-                            onPressed: () => Get.toNamed(loginPageRoute),
+                            onPressed: () {
+                              Get.find<AuthenticationManager>().logOut();
+                            },
                             child: const Text('Log out',
                                 style: TextStyle(color: Colors.red)),
                           ),
