@@ -40,7 +40,7 @@ class JoinedInvitationView extends StatelessWidget {
         }
         return Center(
           child: Text(
-            'There is no available invitation',
+            'You have not joined any invitations yet',
             style: TextStyles.heading5Regular(),
           ),
         );

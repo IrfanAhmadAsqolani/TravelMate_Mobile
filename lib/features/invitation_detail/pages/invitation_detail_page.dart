@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:travelmate/components/components.dart';
 import 'package:travelmate/dependencies/dependencies.dart';
 import 'package:travelmate/features/invitation_detail/controllers/invitation_controller.dart';
+import 'package:travelmate/gen/assets.gen.dart';
 import 'package:travelmate/helpers/date_helper.dart';
 import 'package:travelmate/models/models.dart';
 import 'package:travelmate/models/travel_buddy/create_travel_buddy_param.dart';
 import 'package:travelmate/utils/utils.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 const String invitationDetailPageRoute = '/invitation-detail';
 
@@ -28,7 +30,6 @@ class _InvitationDetailPageState extends State<InvitationDetailPage> {
     super.initState();
     _invitationController.getTravelBuddy(invitation?.id ?? 0);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -82,88 +83,103 @@ class _InvitationDetailPageState extends State<InvitationDetailPage> {
                   user: invitation?.owner,
                 ),
                 SizedBox(height: 10.w),
-                Obx((() {
-                  if (_invitationController.TravelBuddy != TravelBuddyMdl()) {
-                    return Column(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            boxShadow: Shadows.defaultShadow(),
-                          ),
-                          child: TextFormField(
-                            controller: _messageController,
-                            decoration: CustomInputDecoration.formDecoration(
-                              'Add Message',
+                if (invitation?.isOpen ?? false) ...[
+                  Obx((() {
+                    if (_invitationController.TravelBuddy.value == null) {
+                      return Column(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              boxShadow: Shadows.defaultShadow(),
                             ),
-                            maxLines: null,
-                            minLines: 2,
-                            maxLength: 100,
+                            child: TextFormField(
+                              controller: _messageController,
+                              decoration: CustomInputDecoration.formDecoration(
+                                'Add Message',
+                              ),
+                              maxLines: null,
+                              minLines: 2,
+                              maxLength: 100,
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 10.w),
-                        CustomButton.info(
-                          text: 'Request to Join',
-                          onTap: () {
-                            _invitationController.travelBuddyCreate(
-                                param: CreateTravelBuddyParam(
-                                    memberId: 0,
-                                    invitationId: invitation?.id ?? 0,
-                                    status: 0,
-                                    message: _messageController.text));
+                          SizedBox(height: 10.w),
+                          CustomButton.info(
+                            text: 'Request to Join',
+                            onTap: () {
+                              _invitationController.travelBuddyCreate(
+                                  param: CreateTravelBuddyParam(
+                                      memberId: 0,
+                                      invitationId: invitation?.id ?? 0,
+                                      status: 0,
+                                      message: _messageController.text));
+                            },
+                            margin: EdgeInsets.zero,
+                          ),
+                        ],
+                      );
+                    } else {
+                      if (_invitationController.TravelBuddy.value?.status ==
+                          0) {
+                        return CustomButton.inactive(
+                          text: 'Requested',
+                          margin: EdgeInsets.zero,
+                        );
+                      } else if (_invitationController
+                              .TravelBuddy.value?.status ==
+                          1) {
+                        return CustomButton.success(
+                          text: '',
+                          onTap: () async {
+                            final url =
+                                Uri.tryParse(invitation?.groupUrl ?? '');
+                            if (url != null) {
+                              if (await canLaunchUrl(url)) {
+                                await launchUrl(url);
+                              } else {
+                                Get.snackbar('Error', 'Can not launch url');
+                              }
+                            }
                           },
                           margin: EdgeInsets.zero,
-                        ),
-                      ],
-                    );
-                  } else {
-                    if (_invitationController.TravelBuddy.value.status == 0) {
-                      return CustomButton.inactive(
-                        text: 'Requested',
-                        margin: EdgeInsets.zero,
-                      );
-                    } else if (_invitationController.TravelBuddy.value.status == 1){
-                      return CustomButton.success(
-                        text: 'Join Grup ',
-                        onTap: () {},
-                        margin: EdgeInsets.zero,
-                      );
-                    } else if (_invitationController.TravelBuddy.value.status == 2) {
-                      return CustomButton.danger(
-                        text: 'Not Available',
-                        onTap: () {},
-                        margin: EdgeInsets.zero,
-                      );
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(Assets.icons.icWa.path),
+                              SizedBox(width: 5.w),
+                              Text(
+                                'Join Group',
+                                style: TextStyles.heading5SemiBold(
+                                    color: Colors.white),
+                              ),
+                            ],
+                          ),
+                        );
+                      } else if (_invitationController
+                              .TravelBuddy.value?.status ==
+                          2) {
+                        return CustomButton.danger(
+                          text: 'Not Available',
+                          onTap: () {
+                            Get.snackbar('Invitation Closed', "This invitation has been closed");
+                          },
+                          margin: EdgeInsets.zero,
+                        );
+                      }
                     }
-                  }
-                  return SizedBox(height: 44.w);
-                })),
-                Text(
-                  'You might interest in',
-                  style: TextStyles.heading5SemiBold(),
-                ),
+                    return SizedBox();
+                  })),
+                ] else ...[
+                  CustomButton.danger(
+                    text: 'Not Available',
+                    onTap: () {
+                      Get.snackbar('Invitation Closed', "This invitation has been closed");
+                    },
+                    margin: EdgeInsets.zero,
+                  ),
+                ],
               ],
             ),
           ),
-          SizedBox(height: 19.w),
-          // TODO(adityandar): implement when see others available
-          // ListView.separated(
-          //   shrinkWrap: true,
-          //   physics: const NeverScrollableScrollPhysics(),
-          //   padding: EdgeInsets.zero,
-          //   itemBuilder: (context, index) {
-          //     return InvitationCard(
-          //       invitation: InvitationMdl(),
-          //       onTap: () {
-          //         Get.toNamed(invitationDetailPageRoute);
-          //       },
-          //     );
-          //   },
-          //   separatorBuilder: (context, index) => SizedBox(
-          //     height: 17.w,
-          //   ),
-          //   itemCount: 10,
-          // ),
-          SizedBox(height: 30.w),
         ],
       ),
     ));

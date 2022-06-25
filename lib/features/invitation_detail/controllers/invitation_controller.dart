@@ -7,7 +7,7 @@ import '../../../network/network.dart';
 class InvitationController extends GetxController with CacheManager {
   final isFormLoading = false.obs;
   final isLoading = false.obs;
-  var TravelBuddy = Rxn<TravelBuddyMdl>().obs;
+  final TravelBuddy = Rxn<TravelBuddyMdl>();
   
 
   Future<void> travelBuddyCreate(
@@ -23,7 +23,7 @@ class InvitationController extends GetxController with CacheManager {
       getTravelBuddy(param.invitationId);
     } on DioError catch (e) {
       print(e);
-      Get.snackbar('Error', 'Gagal register');
+      Get.snackbar('Error', 'Gagal Request, silahkan isi pesan terlebih dahulu');
     } catch (e) {
       Get.snackbar('Error', 'Gagal register');
     }
